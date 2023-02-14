@@ -23,11 +23,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="HEXO 블로그 복구">
 <meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/01/09/HEXO%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EB%B3%B5%EA%B5%AC/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name">
 <meta property="og:description" content="블로그 구조 파악GitHub Page에서 호스팅 지원 Hexo 라이브러리로 꾸미기, 배포 지원 최초 세팅순서 github page 설정  github repository 설정(public)  node.js설치(패키지 다운로드해서 설치 진행)  블로그를 작업할 폴더에서 우클릭해서 git bash 실행  git 의 ssh 확인  npm install hexo-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-01-09T06:30:04.000Z">
-<meta property="article:modified_time" content="2023-01-09T08:11:16.603Z">
+<meta property="article:modified_time" content="2023-01-10T01:10:24.166Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -39,7 +39,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/01/09/HEXO%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EB%B3%B5%EA%B5%AC/","path":"2023/01/09/HEXO 블로그 복구/","title":"HEXO 블로그 복구"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>HEXO 블로그 복구 | Hexo</title>
+<title>HEXO 블로그 복구 | </title>
   
 
 
@@ -71,7 +71,7 @@
 
     <a href="/exploreHA/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
+      <p class="site-title"></p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -106,7 +106,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B5%AC%EC%A1%B0-%ED%8C%8C%EC%95%85"><span class="nav-number">1.</span> <span class="nav-text">블로그 구조 파악</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%B5%9C%EC%B4%88-%EC%84%B8%ED%8C%85%EC%88%9C%EC%84%9C"><span class="nav-number">2.</span> <span class="nav-text">최초 세팅순서</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%97%AC%EB%9F%AC%EA%B3%B3%EC%97%90%EC%84%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85%ED%95%98%EB%A0%A4%EB%A9%B4"><span class="nav-number">3.</span> <span class="nav-text">여러곳에서 포스팅하려면</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9E%A5%EC%86%8C%EC%97%90%EC%84%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%9D%B4%EC%96%B4%EA%B0%80%EB%A0%A4%EB%A9%B4"><span class="nav-number">3.1.</span> <span class="nav-text">새로운 장소에서 블로그를 이어가려면</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9E%A5%EC%86%8C%EC%97%90%EC%84%9C-%EC%9D%B4%EC%A0%84-%ED%85%8C%EB%A7%88%EB%A5%BC-%EC%84%A4%EC%B9%98%ED%95%98%EB%A0%A4%EB%A9%B4-next%ED%85%8C%EB%A7%88"><span class="nav-number">3.2.</span> <span class="nav-text">새로운 장소에서 이전 테마를 설치하려면(next테마)</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B8%94%EB%A1%9C%EA%B7%B8-%EA%B5%AC%EC%A1%B0-%ED%8C%8C%EC%95%85"><span class="nav-number">1.</span> <span class="nav-text">블로그 구조 파악</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%B5%9C%EC%B4%88-%EC%84%B8%ED%8C%85%EC%88%9C%EC%84%9C"><span class="nav-number">2.</span> <span class="nav-text">최초 세팅순서</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%97%AC%EB%9F%AC%EA%B3%B3%EC%97%90%EC%84%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85%ED%95%98%EB%A0%A4%EB%A9%B4"><span class="nav-number">3.</span> <span class="nav-text">여러곳에서 포스팅하려면</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9E%A5%EC%86%8C%EC%97%90%EC%84%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%9D%B4%EC%96%B4%EA%B0%80%EB%A0%A4%EB%A9%B4"><span class="nav-number">3.1.</span> <span class="nav-text">새로운 장소에서 블로그를 이어가려면</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%9E%A5%EC%86%8C%EC%97%90%EC%84%9C-%EC%9D%B4%EC%A0%84-%ED%85%8C%EB%A7%88%EB%A5%BC-%EC%84%A4%EC%B9%98%ED%95%98%EB%A0%A4%EB%A9%B4-next%ED%85%8C%EB%A7%88"><span class="nav-number">3.2.</span> <span class="nav-text">새로운 장소에서 이전 테마를 설치하려면(next테마)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hexo-Admin-%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0"><span class="nav-number">3.3.</span> <span class="nav-text">Hexo Admin 을 사용하여 관리하기</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -119,9 +119,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/exploreHA/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
@@ -155,12 +159,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="HEXO 블로그 복구 | Hexo">
+      <meta itemprop="name" content="HEXO 블로그 복구 | null">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -175,9 +179,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-01-09 15:30:04 / Modified: 17:11:16" itemprop="dateCreated datePublished" datetime="2023-01-09T15:30:04+09:00">2023-01-09</time>
+      <time title="Created: 2023-01-09 15:30:04" itemprop="dateCreated datePublished" datetime="2023-01-09T15:30:04+09:00">2023-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-01-10 10:10:24" itemprop="dateModified" datetime="2023-01-10T10:10:24+09:00">2023-01-10</time>
     </span>
 
   
@@ -241,6 +251,11 @@
 <li>git clone <a target="_blank" rel="noopener" href="https://github.com/next-theme/theme-next-docs">https://github.com/next-theme/theme-next-docs</a></li>
 <li>npm install hexo-theme-next</li>
 <li>하면 기존것에 대충 잘 버무려짐</li>
+</ol>
+<h4 id="Hexo-Admin-을-사용하여-관리하기"><a href="#Hexo-Admin-을-사용하여-관리하기" class="headerlink" title="Hexo Admin 을 사용하여 관리하기"></a>Hexo Admin 을 사용하여 관리하기</h4><ol>
+<li>npm install hexo-admin –save</li>
+<li>hexo s 하여 서버올리고 url 뒤에 &#x2F;admin 붙여서 로그인한다.</li>
+<li>_config.yml 파일에 아이디 비밀번호 등을 체크한다.</li>
 </ol>
 <p>참고:<br>별5<br><a target="_blank" rel="noopener" href="https://taetaetae.github.io/2016/09/18/hexo_github_blog/">https://taetaetae.github.io/2016/09/18/hexo_github_blog/</a><br>별2<br><a target="_blank" rel="noopener" href="https://minsw.github.io/2021/01/18/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%8B%AC%ED%8F%90%EC%86%8C%EC%83%9D%EC%88%A0%ED%95%98%EA%B8%B0/">https://minsw.github.io/2021/01/18/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%8B%AC%ED%8F%90%EC%86%8C%EC%83%9D%EC%88%A0%ED%95%98%EA%B8%B0/</a><br>별4<br><a target="_blank" rel="noopener" href="https://techwell.wooritech.com/blog/2021/08/08/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8/">https://techwell.wooritech.com/blog/2021/08/08/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8/</a></p>
 
