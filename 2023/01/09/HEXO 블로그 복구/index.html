@@ -23,12 +23,13 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="HEXO 블로그 복구">
 <meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/01/09/HEXO%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EB%B3%B5%EA%B5%AC/index.html">
-<meta property="og:site_name">
+<meta property="og:site_name" content="블로그제목">
 <meta property="og:description" content="블로그 구조 파악GitHub Page에서 호스팅 지원 Hexo 라이브러리로 꾸미기, 배포 지원 최초 세팅순서 github page 설정  github repository 설정(public)  node.js설치(패키지 다운로드해서 설치 진행)  블로그를 작업할 폴더에서 우클릭해서 git bash 실행  git 의 ssh 확인  npm install hexo-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-01-09T06:30:04.000Z">
 <meta property="article:modified_time" content="2023-01-10T01:10:24.166Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="북극여우">
+<meta property="article:tag" content="자바, 스위프트">
 <meta name="twitter:card" content="summary">
 
 
@@ -39,7 +40,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/01/09/HEXO%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EB%B3%B5%EA%B5%AC/","path":"2023/01/09/HEXO 블로그 복구/","title":"HEXO 블로그 복구"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>HEXO 블로그 복구 | </title>
+<title>HEXO 블로그 복구 | 블로그제목</title>
   
 
 
@@ -71,9 +72,10 @@
 
     <a href="/exploreHA/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title"></p>
+      <p class="site-title">블로그제목</p>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">두번째블로그</p>
   </div>
 
   <div class="site-nav-right">
@@ -112,8 +114,8 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
+  <p class="site-author-name" itemprop="name">북극여우</p>
+  <div class="site-description" itemprop="description">설명</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -155,16 +157,16 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/exploreHA/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="북극여우">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="블로그제목">
+      <meta itemprop="description" content="설명">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="HEXO 블로그 복구 | null">
+      <meta itemprop="name" content="HEXO 블로그 복구 | 블로그제목">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -226,7 +228,7 @@
 <li><p>npm install –save hexo-deployer-git</p>
 </li>
 <li><p>_config.yml 파일 설정</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">url: </span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">url:</span> </span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repo:</span> https:<span class="comment">//</span></span><br><span class="line"><span class="symbol">  branch:</span> main</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>깃허브에서 repo설정 진입 - pages</p>
 </li>
@@ -300,7 +302,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">북극여우</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
