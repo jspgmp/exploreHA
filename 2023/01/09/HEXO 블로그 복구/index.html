@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/exploreHA/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/exploreHA/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/exploreHA/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/exploreHA/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="5AUIVYTbHIAuz-eQtxSfZbWW5eg9_EVZMSQycIuXrG0">
 
 <link rel="stylesheet" href="/exploreHA/css/main.css">
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jspgmp.github.io","root":"/exploreHA/","images":"/exploreHA/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/exploreHA/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jspgmp.github.io","root":"/exploreHA/","images":"/exploreHA/images","scheme":"Gemini","darkmode":true,"version":"8.14.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/exploreHA/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/config.min.js"></script>
 
     <meta name="description" content="블로그 구조 파악GitHub Page에서 호스팅 지원 Hexo 라이브러리로 꾸미기, 배포 지원 최초 세팅순서 github page 설정  github repository 설정(public)  node.js설치(패키지 다운로드해서 설치 진행)  블로그를 작업할 폴더에서 우클릭해서 git bash 실행  git 의 ssh 확인  npm install hexo-">
 <meta property="og:type" content="article">
@@ -42,6 +44,9 @@
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>HEXO 블로그 복구 | 블로그제목</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-43861RVV8R"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-43861RVV8R","only_pageview":false}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/analytics/google-analytics.min.js"></script>
 
 
 
@@ -65,6 +70,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -80,15 +88,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/exploreHA/" rel="section"><i class="fa fa-bell fa-fw"></i>Home</a></li><li class="menu-item menu-item-docs"><a href="/exploreHA/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li><li class="menu-item menu-item-archives"><a href="/exploreHA/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">5</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -121,12 +160,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/exploreHA/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -171,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          HEXO 블로그 복구
+          HEXO 블로그 복구<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMvSEVYTyDruJTroZzqt7gg67O16rWsLm1k" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
         </h1>
 
         <div class="post-meta-container">
@@ -184,14 +223,21 @@
 
       <time title="Created: 2023-01-09 15:30:04" itemprop="dateCreated datePublished" datetime="2023-01-09T15:30:04+09:00">2023-01-09</time>
     </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-01-10 10:10:24" itemprop="dateModified" datetime="2023-01-10T10:10:24+09:00">2023-01-10</time>
-    </span>
 
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/exploreHA/2023/01/09/HEXO%20%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EB%B3%B5%EA%B5%AC/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/01/09/HEXO 블로그 복구/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
   
 </div>
 
@@ -250,7 +296,7 @@
 <li>clone된 repo도 commit한다.</li>
 </ol>
 <h4 id="새로운-장소에서-이전-테마를-설치하려면-next테마"><a href="#새로운-장소에서-이전-테마를-설치하려면-next테마" class="headerlink" title="새로운 장소에서 이전 테마를 설치하려면(next테마)"></a>새로운 장소에서 이전 테마를 설치하려면(next테마)</h4><ol>
-<li>git clone <a target="_blank" rel="noopener" href="https://github.com/next-theme/theme-next-docs">https://github.com/next-theme/theme-next-docs</a></li>
+<li>git clone <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2Nz">https://github.com/next-theme/theme-next-docs<i class="fa fa-external-link-alt"></i></span></li>
 <li>npm install hexo-theme-next</li>
 <li>하면 기존것에 대충 잘 버무려짐</li>
 </ol>
@@ -259,7 +305,7 @@
 <li>hexo s 하여 서버올리고 url 뒤에 &#x2F;admin 붙여서 로그인한다.</li>
 <li>_config.yml 파일에 아이디 비밀번호 등을 체크한다.</li>
 </ol>
-<p>참고:<br>별5<br><a target="_blank" rel="noopener" href="https://taetaetae.github.io/2016/09/18/hexo_github_blog/">https://taetaetae.github.io/2016/09/18/hexo_github_blog/</a><br>별2<br><a target="_blank" rel="noopener" href="https://minsw.github.io/2021/01/18/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%8B%AC%ED%8F%90%EC%86%8C%EC%83%9D%EC%88%A0%ED%95%98%EA%B8%B0/">https://minsw.github.io/2021/01/18/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%8B%AC%ED%8F%90%EC%86%8C%EC%83%9D%EC%88%A0%ED%95%98%EA%B8%B0/</a><br>별4<br><a target="_blank" rel="noopener" href="https://techwell.wooritech.com/blog/2021/08/08/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8/">https://techwell.wooritech.com/blog/2021/08/08/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8/</a></p>
+<p>참고:<br>별5<br><span class="exturl" data-url="aHR0cHM6Ly90YWV0YWV0YWUuZ2l0aHViLmlvLzIwMTYvMDkvMTgvaGV4b19naXRodWJfYmxvZy8=">https://taetaetae.github.io/2016/09/18/hexo_github_blog/<i class="fa fa-external-link-alt"></i></span><br>별2<br><span class="exturl" data-url="aHR0cHM6Ly9taW5zdy5naXRodWIuaW8vMjAyMS8wMS8xOC9IZXhvLSVFQiVCOCU5NCVFQiVBMSU5QyVFQSVCNyVCOC0lRUMlOEIlQUMlRUQlOEYlOTAlRUMlODYlOEMlRUMlODMlOUQlRUMlODglQTAlRUQlOTUlOTglRUElQjglQjAv">https://minsw.github.io/2021/01/18/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%8B%AC%ED%8F%90%EC%86%8C%EC%83%9D%EC%88%A0%ED%95%98%EA%B8%B0/<i class="fa fa-external-link-alt"></i></span><br>별4<br><span class="exturl" data-url="aHR0cHM6Ly90ZWNod2VsbC53b29yaXRlY2guY29tL2Jsb2cvMjAyMS8wOC8wOC9IZXhvLSVFQiVCOCU5NCVFQiVBMSU5QyVFQSVCNyVCOC8=">https://techwell.wooritech.com/blog/2021/08/08/Hexo-%EB%B8%94%EB%A1%9C%EA%B7%B8/<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
 
@@ -289,6 +335,11 @@
 
 
 
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
 </div>
   </main>
 
@@ -297,26 +348,20 @@
 
 
 <div class="copyright">
-  &copy; 
+  &copy; 2014 – 
   <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">북극여우</span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
   </div>
 
     </div>
   </footer>
 
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
   <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
@@ -329,7 +374,18 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/exploreHA/js/comments.js"></script><script src="/exploreHA/js/utils.js"></script><script src="/exploreHA/js/motion.js"></script><script src="/exploreHA/js/schemes/muse.js"></script><script src="/exploreHA/js/next-boot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/pjax.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/tags/mermaid.min.js"></script>
+
+
 
   
 
@@ -338,9 +394,12 @@
 
   
 
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/math/mathjax.min.js"></script>
 
 
-
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"next-theme","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/comments/disqus.min.js"></script>
 
 </body>
 </html>
