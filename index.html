@@ -256,7 +256,50 @@
 </ul>
 <h2 id="Regular-Expression-Explanation"><a href="#Regular-Expression-Explanation" class="headerlink" title="Regular Expression Explanation"></a>Regular Expression Explanation</h2><p>We explained that the regular expression matches any single digit that is followed by one or more groups of three digits that are not followed by a digit. This effectively matches every digit in the number string except for the ones at the end that are not part of a group of three.</p>
 <h2 id="Example-Process"><a href="#Example-Process" class="headerlink" title="Example Process"></a>Example Process</h2><p>We provided an example process to demonstrate how the regular expression works. Suppose we have the number string “1000000000”. The regular expression matches the first digit “1” because it is followed by a group of three digits “000”. It then matches the second digit “0” because it is followed by another group of three digits “000”. It continues to match every digit in the number string that is followed by a group of three digits. When it reaches the end of the string, it stops matching because the last digit “0” is not followed by a group of three digits.</p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>We concluded that the regular expression <code>(\d)(?=(?:\d&#123;3&#125;)+(?!\d))</code> can be used to format a number string by adding commas every three digits. The regular expression matches every digit in the string except for the ones at the end that are not part of a group of three.</p>
+<h2 id="Conclusion-1"><a href="#Conclusion-1" class="headerlink" title="Conclusion 1"></a>Conclusion 1</h2><p>We concluded that the regular expression <code>(\d)(?=(?:\d&#123;3&#125;)+(?!\d))</code> can be used to format a number string by adding commas every three digits. The regular expression matches every digit in the string except for the ones at the end that are not part of a group of three.</p>
+<h2 id="More-Techniques"><a href="#More-Techniques" class="headerlink" title="More Techniques"></a>More Techniques</h2><ol>
+<li><p>Negative Lookahead: This is similar to positive lookahead, but it matches if the pattern does NOT occur after the current position. It is denoted by (?!pattern).</p>
+</li>
+<li><p>Capturing Groups with Names: Instead of just using numbered capturing groups like $1, you can assign names to capturing groups for easier reference. For example, (?<year>\d{4}) would match a four-digit number and capture it in the group named “year”.</p>
+</li>
+<li><p>Quantifiers: Quantifiers allow you to specify how many times a character or group should be matched. For example, a{3,5} would match “aaa”, “aaaa”, or “aaaaa”, but not “aa”.</p>
+</li>
+<li><p>Alternation: Alternation allows you to match one pattern OR another. It is denoted by the | symbol. For example, (cat|dog) would match “cat” or “dog”.</p>
+</li>
+<li><p>Character Classes: Character classes allow you to match a range of characters. For example, [a-z] would match any lowercase letter, and [0-9] would match any digit.</p>
+</li>
+<li><p>Non-Capturing Groups: Similar to capturing groups, non-capturing groups allow you to group  parts of the pattern together without capturing the match. This can be useful for improving performance and simplifying the regular expression. Non-capturing groups are denoted by (?:pattern).</p>
+</li>
+<li><p>Anchors: Anchors allow you to match a pattern at a specific position in the string. The most common anchors are ^, which matches the start of a line, and $, which matches the end of a line.</p>
+</li>
+<li><p>Backreferences: Backreferences allow you to match a pattern that was previously matched by a capturing group. This can be useful for finding repeated patterns in a string. Backreferences are denoted by \number, where number is the number of the capturing group you want to reference.</p>
+</li>
+<li><p>Lookbehinds: Lookbehinds are similar to lookaheads, but they match a pattern that precedes the current position in the string. Lookbehinds are denoted by (?&lt;&#x3D;pattern) for a positive lookbehind and (?&lt;!pattern) for a negative lookbehind.</p>
+</li>
+<li><p>Unicode Characters: Regular expressions can match any Unicode character by using escape sequences. For example, \p{L} matches any letter, and \p{N} matches any digit.</p>
+</li>
+<li><p>Character Classes: Character classes allow you to match a single character from a set of characters. They are denoted by square brackets, for example [aeiou] matches any vowel.</p>
+</li>
+<li><p>Alternation: Alternation allows you to match one of several alternatives. It is denoted by the pipe character |. For example, (cat|dog) matches either “cat” or “dog”.</p>
+</li>
+<li><p>Quantifiers: Quantifiers allow you to match a certain number of repetitions of a pattern. The most common quantifiers are * for zero or more, + for one or more, and ? for zero or one.</p>
+</li>
+<li><p>Dot: The dot . matches any character except a newline character.</p>
+</li>
+<li><p>Word Boundaries: Word boundaries allow you to match a pattern only when it appears at the beginning or end of a word. They are denoted by \b.</p>
+</li>
+<li><p>Greedy vs. Lazy Matching: By default, regular expressions are greedy and match as much as possible. You can use a ? after a quantifier to make it lazy and match as little as possible.</p>
+</li>
+<li><p>Character Escapes: Character escapes allow you to match characters that have special meaning in regular expressions. For example, to match a literal dot character, you need to escape it with a backslash: ..</p>
+</li>
+<li><p>Substitution: Regular expressions are often used to replace text. You can use the replace() method to substitute matches with other text.</p>
+</li>
+<li><p>Flags: Regular expressions can have flags that modify their behavior. The most common flags are i for case-insensitive matching and g for global matching.</p>
+</li>
+<li><p>Grouping: Grouping allows you to treat a pattern as a single unit and apply a quantifier to it. Groups are denoted by parentheses, for example a(bc)+ matches “abc”, “abcbc”, “abcbcbc”, and so on.</p>
+</li>
+</ol>
+<h2 id="Conclution-2"><a href="#Conclution-2" class="headerlink" title="Conclution 2"></a>Conclution 2</h2><p>얼마전 코딩테스트 보러갔다가 종이 시험을 보는것을 보고 1차로 놀랐다. 그리곤 문제를 보는데 1번부터 내 머리속에 아무것도 없는것을 느끼고 2차로 놀랐다. IDE의 힘을 빌려 AI HELPER의 빌려 살다보니 그렇다. 특히 정규식같은 부분은 한번 써놓고 오래 보질 않으니 다 휘발되고 머리에 남은게 없었다.<br>그렇게 계속 생각없이 살다가 Fiddler로 결제모듈을 뜯다보니 왠걸 갑자기 내가 정규식이 아닌 리스트로 풀었던 답이 딱 나오길래 글을 남긴다. </p>
 
       
     </div>
