@@ -21,26 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jspgmp.github.io","root":"/exploreHA/","images":"/exploreHA/images","scheme":"Gemini","darkmode":true,"version":"8.14.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/exploreHA/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/config.min.js"></script>
 
-    <meta name="description" content="설명">
-<meta property="og:type" content="website">
-<meta property="og:title" content="블로그제목">
-<meta property="og:url" content="https://jspgmp.github.io/exploreHA/archives/2023/index.html">
+    <meta name="description" content="자바 String 은 왜 불변객체인가 ?  접근제어자의 종류와 특징 ?  OOP 의 4가지 특징 ?  캡슐화와 은닉화의 특징 ?  OOP의 5대 원칙 ?  JVM 구조 클래스, 객체, 인스턴스의 차이 interface와 abstract class의 차이 checkedException 과 uncheckedException의 차이 Call by Referenc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자바 기술면접 질문목록">
+<meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/index.html">
 <meta property="og:site_name" content="블로그제목">
-<meta property="og:description" content="설명">
+<meta property="og:description" content="자바 String 은 왜 불변객체인가 ?  접근제어자의 종류와 특징 ?  OOP 의 4가지 특징 ?  캡슐화와 은닉화의 특징 ?  OOP의 5대 원칙 ?  JVM 구조 클래스, 객체, 인스턴스의 차이 interface와 abstract class의 차이 checkedException 과 uncheckedException의 차이 Call by Referenc">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-13T00:29:41.000Z">
+<meta property="article:modified_time" content="2023-04-13T00:47:34.907Z">
 <meta property="article:author" content="북극여우">
 <meta property="article:tag" content="자바, 스위프트">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jspgmp.github.io/exploreHA/archives/2023/">
+<link rel="canonical" href="https://jspgmp.github.io/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2023/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/","path":"2023/04/13/자바-기술면접-질문목록-1/","title":"자바 기술면접 질문목록"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | 블로그제목</title>
+<title>자바 기술면접 질문목록 | 블로그제목</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-43861RVV8R"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-43861RVV8R","only_pageview":false}</script>
@@ -78,7 +80,7 @@
 
     <a href="/exploreHA/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">블로그제목</h1>
+      <p class="site-title">블로그제목</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">두번째블로그</p>
@@ -132,7 +134,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -145,6 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9E%90%EB%B0%94"><span class="nav-number">1.</span> <span class="nav-text">자바</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9E%90%EB%B0%94-%EB%B0%B0%EC%B9%98"><span class="nav-number">2.</span> <span class="nav-text">자바 배치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9E%90%EB%B0%94-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8"><span class="nav-number">3.</span> <span class="nav-text">자바 스프링부트</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -178,233 +181,169 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 11 posts in total. Keep on posting.</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
+      <meta itemprop="name" content="북극여우">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="블로그제목">
+      <meta itemprop="description" content="설명">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="자바 기술면접 질문목록 | 블로그제목">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          자바 기술면접 질문목록<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMv7J6Q67CULeq4sOyIoOuptOygkS3sp4jrrLjrqqnroZ0tMS5tZA==" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-04-13 09:29:41" itemprop="dateCreated datePublished" datetime="2023-04-13T09:29:41+09:00">2023-04-13</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/04/13/자바-기술면접-질문목록-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="자바"><a href="#자바" class="headerlink" title="자바"></a>자바</h2><ol>
+<li>String 은 왜 불변객체인가 ? </li>
+<li>접근제어자의 종류와 특징 ? </li>
+<li>OOP 의 4가지 특징 ? </li>
+<li>캡슐화와 은닉화의 특징 ? </li>
+<li>OOP의 5대 원칙 ? </li>
+<li>JVM 구조</li>
+<li>클래스, 객체, 인스턴스의 차이</li>
+<li>interface와 abstract class의 차이</li>
+<li>checkedException 과 uncheckedException의 차이</li>
+<li>Call by Reference 와 Call by value 의 차이</li>
+<li>오버로딩과 오버라이딩의 차이</li>
+<li>쓰레드세이프</li>
+<li>Garbage Collector는 어떻게 동작하는지 ? </li>
+<li>제네릭을 왜 쓰는지 ? </li>
+<li>list, set, map 의 차이</li>
+<li>이진탐색트리란 ? </li>
+<li>treeset 과 hashset 의 차이</li>
+</ol>
+<h2 id="자바-배치"><a href="#자바-배치" class="headerlink" title="자바 배치"></a>자바 배치</h2><ol>
+<li>왜 스프링 배치를 사용하는가?</li>
+</ol>
+<ul>
+<li>해당 기술 사용 선택 기준사한, 장단점</li>
+</ul>
+<ol start="2">
+<li>멱등성은 어떻게 유지하는가</li>
+<li>스프링 배치 메타데이터 테이블은 어떤 것이 있나</li>
+<li>배치 실행 도중 실패시 처리 방법</li>
+</ol>
+<ul>
+<li>Skip, Retry 개념 및 사용 경험</li>
+</ul>
+<ol start="5">
+<li>스프링 배치 멀티스레드, 파티션 방법과 차이점 </li>
+<li>스프링배치에서 트랜잭션 관리를 왜 청크 단위로 하는지 </li>
+<li>테스킷 ve Reader&#x2F;Write 차이</li>
+<li>커서 vs 페이징 차이, 사용 클래스 </li>
+<li>배치 실행은?</li>
+</ol>
+<ul>
+<li>젠킨스(실행 및 스케쥴링)</li>
+</ul>
+<ol start="10">
+<li>배치 보니터링 방법</li>
+</ol>
+<ul>
+<li>지연되는 배치 등 모니처링 및 후속 처리</li>
+</ul>
+<h2 id="자바-스프링부트"><a href="#자바-스프링부트" class="headerlink" title="자바 스프링부트"></a>자바 스프링부트</h2><ol>
+<li>필터와 인터셉터의 차이</li>
+<li>스프링부트는 왜 생긴것인가? </li>
+<li>스프링 DI 란 무엇인가 ? </li>
+<li>스프링 IOC 란 무엇인가 ? </li>
+<li>스프링 ORM 이란 무엇인가 ?</li>
+<li>Hibernate 란 무엇인가 ? </li>
+<li>객체 주입방식 종류와 특징, 차이점</li>
+<li>스프링 MVC life cycle 구조</li>
+</ol>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T10:08:44+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EB%B0%B0%EC%B9%98/" itemprop="url">
-            <span itemprop="name">스프링부트 배치</span>
-          </a>
-      </div>
+    <footer class="post-footer">
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/exploreHA/2023/04/04/Regular%20Expression%20in%20Java/" rel="prev" title="Regular Expression in Java">
+                  <i class="fa fa-chevron-left"></i> Regular Expression in Java
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0-%EB%A9%B4%EC%A0%91-%EB%8B%B5%EB%B3%80/" rel="next" title="자바 기술 면접 답변 1">
+                  자바 기술 면접 답변 1 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T10:04:41+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89%ED%8A%B8%EB%A6%AC/" itemprop="url">
-            <span itemprop="name">이진탐색트리</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T10:03:13+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/treeset-%EA%B3%BC-hashset-%EC%9D%98-%EC%B0%A8%EC%9D%B4/" itemprop="url">
-            <span itemprop="name">treeset 과 hashset 의 차이</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T09:58:20+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0-%EB%A9%B4%EC%A0%91-%EB%8B%B5%EB%B3%80-2/" itemprop="url">
-            <span itemprop="name">List, Set, Map의 차이와 선택방법</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T09:51:29+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0-%EB%A9%B4%EC%A0%91-%EB%8B%B5%EB%B3%80/" itemprop="url">
-            <span itemprop="name">자바 기술 면접 답변 1</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-13T09:29:41+09:00"
-              content="2023-04-13">
-          04-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/13/%EC%9E%90%EB%B0%94-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%AA%A9%EB%A1%9D-1/" itemprop="url">
-            <span itemprop="name">자바 기술면접 질문목록</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-04T15:33:18+09:00"
-              content="2023-04-04">
-          04-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/04/04/Regular%20Expression%20in%20Java/" itemprop="url">
-            <span itemprop="name">Regular Expression in Java</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-02-14T09:51:13+09:00"
-              content="2023-02-14">
-          02-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/02/14/Swift-Questions/" itemprop="url">
-            <span itemprop="name">Swift Questions</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-02-07T10:29:04+09:00"
-              content="2023-02-07">
-          02-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/02/07/Swift%20Practices/" itemprop="url">
-            <span itemprop="name">Swift Practices</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-01-09T16:53:36+09:00"
-              content="2023-01-09">
-          01-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/exploreHA/2023/01/09/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
-  
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/exploreHA/archives/2023/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/exploreHA/archives/2023/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 </div>
   </main>
 
