@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>스프링부트 배치 구동순서</title>
+      <link href="/exploreHA/2023/04/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EB%B0%B0%EC%B9%98-%EA%B5%AC%EB%8F%99%EC%88%9C%EC%84%9C/"/>
+      <url>/exploreHA/2023/04/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EB%B0%B0%EC%B9%98-%EA%B5%AC%EB%8F%99%EC%88%9C%EC%84%9C/</url>
+      
+        <content type="html"><![CDATA[<p>스프링 부트 배치는 대량의 데이터를 처리하는데 유용한 프레임워크입니다. 이를 사용하면 일괄 처리(batch processing) 작업을 효율적으로 수행할 수 있습니다. 스프링 부트 배치는 다양한 구성 요소로 구성되며, 이러한 구성 요소는 특정 순서로 구동되어야 합니다. 이번 포스팅에서는 스프링 부트 배치 구동 순서에 대해 자세히 알아보겠습니다.</p><p>JobRepository<br>스프링 부트 배치는 먼저 JobRepository를 생성합니다. 이는 배치 작업을 수행하는 동안 상태 정보를 저장하는 데 사용됩니다. JobRepository는 데이터베이스를 기반으로 작동하며, 스프링 부트 배치는 사용자가 지정한 데이터베이스를 기본적으로 사용합니다.</p><p>JobLauncher<br>JobRepository가 생성되면, 다음으로 JobLauncher가 생성됩니다. JobLauncher는 JobRepository를 사용하여 배치 작업을 시작합니다. 이를 위해 JobLauncher는 Job과 JobParameters를 매개변수로 받아들입니다.</p><p>Job<br>JobLauncher가 생성되면 Job도 생성됩니다. Job은 일괄 처리 작업의 실행 단위입니다. Job은 하나 이상의 Step으로 구성됩니다.</p><p>Step<br>Step은 일괄 처리 작업의 개별 단계를 정의합니다. Step은 Reader, Processor, Writer로 구성됩니다. Reader는 데이터 소스에서 데이터를 읽어들이고, Processor는 데이터를 가공하고, Writer는 가공된 데이터를 저장합니다.</p><p>ItemReader<br>ItemReader는 Step에서 사용되며, 데이터 소스에서 데이터를 읽어들입니다.</p><p>ItemProcessor<br>ItemProcessor는 Step에서 사용되며, 읽어들인 데이터를 가공합니다.</p><p>ItemWriter<br>ItemWriter는 Step에서 사용되며, 가공된 데이터를 저장합니다.</p><p>ExecutionContext<br>ExecutionContext는 Step의 상태 정보를 저장하는 데 사용됩니다. 이를 사용하여 다음 번 실행 시점에 이전 실행 결과를 기반으로 작업을 수행할 수 있습니다.</p><p>JobExecution<br>JobExecution은 Job의 실행 상태 정보를 저장합니다. JobExecution은 JobRepository에 저장됩니다.</p><p>JobInstance<br>JobInstance는 Job의 인스턴스를 나타냅니다. 즉, 동일한 Job을 여러 번 실행할 경우, 각 실행마다 별도의 JobInstance가 생성됩니다.</p><p>JobParameters<br>JobParameters는 Job을 실행할 때 전달되는 매개변수입니다. 예를 들어, Job을 실행할 때 사용할 데이터베이스 연결 정보나 파일 경로 등을 전달할 수 있습니다.</p><p>이러한 구성 요소는 스프링 부트 배치를 구성하는 데 필요한 기본적인 요소입니다. 스프링 부트 배치를 사용할 때에는 이러한 구성 요소들이 어떻게 상호작용하는지 이해하는 것이 중요합니다. 일괄 처리 작업을 실행할 때, 스프링 부트 배치는 JobRepository를 사용하여 JobExecution과 StepExecution의 상태 정보를 저장하고, ExecutionContext를 사용하여 상태 정보를 공유합니다. 또한 JobLauncher를 사용하여 Job을 시작하고, Job은 하나 이상의 Step으로 구성되며, Step은 ItemReader, ItemProcessor, ItemWriter로 구성됩니다.</p><p>각 구성 요소들의 역할을 이해하면 스프링 부트 배치를 사용하여 일괄 처리 작업을 효율적으로 구현할 수 있습니다. 또한 스프링 부트 배치에서는 다양한 기능들을 제공하므로, 필요에 따라 설정을 변경하여 개인적인 요구사항에 맞게 사용할 수 있습니다. 예를 들어, Job의 실행 주기를 설정하거나, Step의 실행 순서를 변경하는 등의 설정을 변경할 수 있습니다.</p><p>스프링 부트 배치는 대규모 데이터 처리를 위한 강력한 프레임워크입니다. 이를 사용하여 데이터 처리 작업을 효율적으로 수행할 수 있으며, 이를 위해 필요한 구성 요소들을 제공합니다. 스프링 부트 배치의 구동 순서를 이해하고, 필요한 설정을 변경하여 개인적인 요구사항에 맞게 사용하면, 더욱 효율적으로 일괄 처리 작업을 수행할 수 있습니다.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>스프링부트</title>
       <link href="/exploreHA/2023/04/13/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/"/>
       <url>/exploreHA/2023/04/13/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/</url>
