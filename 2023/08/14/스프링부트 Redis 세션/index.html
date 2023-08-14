@@ -23,13 +23,13 @@
 
     <meta name="description" content="Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다. 여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런">
 <meta property="og:type" content="article">
-<meta property="og:title" content="스프링부트 Redis 세션설정">
+<meta property="og:title" content="스프링부트 Redis 세션설정으로 중복 로그인 방지">
 <meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/index.html">
 <meta property="og:site_name" content="블로그제목">
 <meta property="og:description" content="Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다. 여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-14T07:46:32.000Z">
-<meta property="article:modified_time" content="2023-08-14T07:49:51.915Z">
+<meta property="article:modified_time" content="2023-08-14T07:51:22.381Z">
 <meta property="article:author" content="북극여우">
 <meta property="article:tag" content="자바, 스위프트">
 <meta name="twitter:card" content="summary">
@@ -39,10 +39,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/","path":"2023/08/14/스프링부트 Redis 세션/","title":"스프링부트 Redis 세션설정"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/","path":"2023/08/14/스프링부트 Redis 세션/","title":"스프링부트 Redis 세션설정으로 중복 로그인 방지"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>스프링부트 Redis 세션설정 | 블로그제목</title>
+<title>스프링부트 Redis 세션설정으로 중복 로그인 방지 | 블로그제목</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-43861RVV8R"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-43861RVV8R","only_pageview":false}</script>
@@ -204,12 +204,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="스프링부트 Redis 세션설정 | 블로그제목">
+      <meta itemprop="name" content="스프링부트 Redis 세션설정으로 중복 로그인 방지 | 블로그제목">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          스프링부트 Redis 세션설정<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMv7Iqk7ZSE66eB67aA7Yq4IFJlZGlzIOyEuOyFmC5tZA==" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
+          스프링부트 Redis 세션설정으로 중복 로그인 방지<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMv7Iqk7ZSE66eB67aA7Yq4IFJlZGlzIOyEuOyFmC5tZA==" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
         </h1>
 
         <div class="post-meta-container">
