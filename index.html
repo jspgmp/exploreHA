@@ -94,7 +94,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/exploreHA/" rel="section"><i class="fa fa-bell fa-fw"></i>Home</a></li><li class="menu-item menu-item-docs"><a href="/exploreHA/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li><li class="menu-item menu-item-archives"><a href="/exploreHA/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">13</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/exploreHA/" rel="section"><i class="fa fa-bell fa-fw"></i>Home</a></li><li class="menu-item menu-item-docs"><a href="/exploreHA/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li><li class="menu-item menu-item-archives"><a href="/exploreHA/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">15</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/exploreHA/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -179,6 +179,241 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
+      <meta itemprop="name" content="북극여우">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="블로그제목">
+      <meta itemprop="description" content="설명">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 블로그제목">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/" class="post-title-link" itemprop="url">스프링부트 Redis 세션설정</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-08-14 16:46:32" itemprop="dateCreated datePublished" datetime="2023-08-14T16:46:32+09:00">2023-08-14</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/08/14/스프링부트 Redis 세션/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다.</p>
+<p>여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런서 뒤의 여러 서버 인스턴스) 이러한 인메모리 세션 관리 방식은 문제를 일으킬 수 있습니다. 왜냐하면 각 JVM 인스턴스는 자신만의 세션 정보를 가지고 있어서 다른 인스턴스의 세션 정보를 알지 못하기 때문입니다.</p>
+<p>반면, SpringSessionBackedSessionRegistry는 Spring Session을 사용하며, Spring Session은 외부 저장소 (예: Redis, JDBC, Hazelcast 등)를 사용하여 세션 정보를 저장합니다. 이 방식을 사용하면 여러 애플리케이션 인스턴스 간에 세션 정보를 공유할 수 있습니다.</p>
+<p>따라서:</p>
+<p>단일 인스턴스 환경에서는 Spring Security의 기본 sessionRegistry()만으로도 충분합니다.<br>하지만 여러 인스턴스에서 세션 정보를 공유해야 하는 환경에서는 SpringSessionBackedSessionRegistry와 같은 방법을 사용하여 Spring Session을 활용해야 합니다.<br>이렇게 설정함으로써 여러 서버 인스턴스 간에 세션 정보를 일관되게 공유하면서 동시 로그인 제한과 같은 기능을 정상적으로 구현할 수 있습니다.</p>
+<p>사전 Redis 세션 설정을 마치고 추가적으로 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> FindByIndexNameSessionRepository sessionRepository;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> SpringSessionBackedSessionRegistry <span class="title function_">sessionRegistry</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringSessionBackedSessionRegistry</span>&lt;&gt;(<span class="built_in">this</span>.sessionRepository);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    .sessionManagement()</span><br><span class="line">        .maximumSessions(<span class="number">1</span>)</span><br><span class="line">        .maxSessionsPreventsLogin(<span class="literal">true</span>)</span><br><span class="line">        .sessionRegistry(sessionRegistry())</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>커스텀 로그인 핸들이 없어도 된다. </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
+      <meta itemprop="name" content="북극여우">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="블로그제목">
+      <meta itemprop="description" content="설명">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 블로그제목">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/" class="post-title-link" itemprop="url">프로젝트aws셋업</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-30 21:47:43" itemprop="dateCreated datePublished" datetime="2023-06-30T21:47:43+09:00">2023-06-30</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/06/30/프로젝트aws셋업/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="프론트-백엔드-프로젝트-aws로-서비스하기"><a href="#프론트-백엔드-프로젝트-aws로-서비스하기" class="headerlink" title="프론트+백엔드 프로젝트 aws로 서비스하기"></a>프론트+백엔드 프로젝트 aws로 서비스하기</h1><h2 id="1-프로젝트-소개"><a href="#1-프로젝트-소개" class="headerlink" title="1. 프로젝트 소개"></a>1. 프로젝트 소개</h2><p>학원 운영을 하며 여러가지 관리할것들이 쌓이다보니, 상당히 복잡해져 웹서비스로 준비하게 되었다. </p>
+<h3 id="프론트엔드-DevExtreme-리액트-라이브러리"><a href="#프론트엔드-DevExtreme-리액트-라이브러리" class="headerlink" title="프론트엔드: DevExtreme 리액트 라이브러리"></a>프론트엔드: DevExtreme 리액트 라이브러리</h3><p>개인은 무료다.<br>DataGrid, Shceduler, 기본 template으로 다 했다.<br>jsp mvc에서는 화면을 전적으로 백엔드에서 통제를 하지만, 리액트에서는 별개로 돌아가기 때문에 강제로 로그인 이후 화면으로 진입한다면 리소스 제한만 했다.<br>Doc를 보면서 화면을 제작하다보니 가장 많은 시간이 들어갔고, 컴포넌트 안에 컴포넌트를 반복해서 집어넣다보니 상태관리나 변수 조절이 까다로웠다. </p>
+<h3 id="백엔드-스프링부트"><a href="#백엔드-스프링부트" class="headerlink" title="백엔드: 스프링부트"></a>백엔드: 스프링부트</h3><p>JPA로 여러 엔티티를 모조리 관계를 맺었다.<br>useYn 과 레코드 삭제(cascade)까지 사용했다. cascade 설정 시 customId를 사용하면 생성시기가 늦어 삭제가 안되므로 cascade적용 엔티티는 기본 id생성규칙을 따랐다.<br>RDS로 설정했다가 비용이 많이나와서 ec2에 직접 mysql8을 설치해서 사용하는것으로 변경했다. 로컬 개발환경의 mysql과 ec2 의 것을 일치시키면 편하다.<br>스프링 시큐리티 로그인(jwt)을 적용했다. </p>
+<h2 id="2-aws으로"><a href="#2-aws으로" class="headerlink" title="2. aws으로"></a>2. aws으로</h2><h3 id="인스턴스-설정"><a href="#인스턴스-설정" class="headerlink" title="인스턴스 설정"></a>인스턴스 설정</h3><p>처음 ami 고를 때 amazon linux 2023으로 했더니 mysql8설치가 귀찮아졌다. 빠르게 인스턴스 세팅을 다시 amazon linux 2로 하다가 인스턴스 유형을 x86 t2.micro에서 arm t4g.micro로 변경했다. 이유는 속도는 비슷하고 조금 더 싸다.<br>온디맨드 시간당 t2.micro : 0.0116USD, t4g.micro : 0.0084USD<br>프리티어는 날아가서 없다. </p>
+<h4 id="보안그룹"><a href="#보안그룹" class="headerlink" title="보안그룹"></a>보안그룹</h4><p>처음에 인스턴스 생성 시 보안그룹을 만들거나 기존것을 고른다.<br>인바운드: http로 들어오니 80포트 모두에게<br>쉘로 붙어야 하니 22포트 내 ip만<br>로컬에서 DB 넣어야 하니 3306포트 내 ip만, 아웃바운드는 다 허용</p>
+<h4 id="자바-설치"><a href="#자바-설치" class="headerlink" title="자바 설치"></a>자바 설치</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum list <span class="strong">*java*</span> </span><br></pre></td></tr></table></figure>
+<p>검색해서 원하는 것으로 설치한다.<br>나는 java-17-amazon-corretto-headless.aarch64<br>으로 설치했다. </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">java</span> -version</span><br><span class="line"></span><br><span class="line"><span class="attribute">openjdk</span> version <span class="string">&quot;17.0.7&quot;</span> <span class="number">2023</span>-<span class="number">04</span>-<span class="number">18</span> LTS</span><br><span class="line"><span class="attribute">OpenJDK</span> Runtime Environment Corretto-<span class="number">17.0.7.7</span>.<span class="number">1</span> (build <span class="number">17</span>.<span class="number">0</span>.<span class="number">7</span>+<span class="number">7</span>-LTS)</span><br><span class="line"><span class="attribute">OpenJDK</span> <span class="number">64</span>-Bit Server VM Corretto-<span class="number">17.0.7.7</span>.<span class="number">1</span> (build <span class="number">17</span>.<span class="number">0</span>.<span class="number">7</span>+<span class="number">7</span>-LTS, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
+<p>잘 나오니 환경변수 설정은 패스한다. </p>
+<h4 id="nginx-설치"><a href="#nginx-설치" class="headerlink" title="nginx 설치"></a>nginx 설치</h4><p>인스턴스로 http를 타고 들어오면 80포트로 들어온다.<br>리액트를 빌드해서 스프링부트에 넣고 다시 war로 감싸서 8080포트로 들어가야 하므로 리버스 프록시 설정을 해줄 nginx를 설치한다. </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nginx</span><br><span class="line">sudo vi <span class="regexp">/etc/</span>nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>80포트를 8080으로 물려주는 세팅을 한다. (###안 부분)</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span>       [::]:<span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">server_name</span>  _;</span><br><span class="line">        <span class="attribute">root</span>         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">        <span class="attribute">include</span> /etc/nginx/default.d/<span class="regexp">*.conf</span>;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="comment">################################################</span></span><br><span class="line">                <span class="attribute">proxy_pass</span> http://localhost:8080;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> X-Forwarded-For proxy_add_x_forwarded_for;</span><br><span class="line">            <span class="comment">################################################</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">            <span class="section">location</span> = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">            <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>대개는 location 안쪽만 수정을 하면된다. </p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="params">system</span>ctl start nginx</span><br><span class="line">sudo <span class="params">system</span>ctl enable nginx</span><br></pre></td></tr></table></figure>
+<p>시작하고 시작프로그램으로 등록한다. </p>
+<h4 id="mysql8-설치-amazon-linux-2"><a href="#mysql8-설치-amazon-linux-2" class="headerlink" title="mysql8 설치 (amazon linux 2)"></a>mysql8 설치 (amazon linux 2)</h4><p>amazon linux 2023은 잘 안됐다. 그래서 인스턴트 다시 생성</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo amazon-linux-<span class="keyword">extras </span><span class="keyword">install </span>epel -y</span><br></pre></td></tr></table></figure>
+<p>epel repo 설치</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install https:<span class="regexp">//</span>repo.mysql.com/mysql80-community-release-el7-<span class="number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>MySql Community Repo 설치(최신버전있는데 이걸로하는게 설치 잘됌)</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install mysql-community-<span class="keyword">server</span></span><br><span class="line">sudo yum install mysql-community-<span class="keyword">client</span></span><br></pre></td></tr></table></figure>
+<p>둘째줄은 이미 설치됐다고 나왔다.<br>출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1ldmkudGVjaC9pbnN0YWxsLW15c3FsLTgtY2xpZW50LW9uLWFtYXpvbi1saW51eC0yLWFybS1hbmQteDg2XzY0Lw==">https://blog.mevi.tech/install-mysql-8-client-on-amazon-linux-2-arm-and-x86_64/<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start <span class="symbol">mysqld@</span></span><br></pre></td></tr></table></figure>
+<p>mysql을 실행한다. </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -<span class="selector-tag">p</span></span><br></pre></td></tr></table></figure>
+<p>mysql8은 초기비밀번호가 있단다. 찾으러간다.</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cat /var/<span class="keyword">log</span>/mysqld.<span class="keyword">log</span></span><br><span class="line"></span><br><span class="line"><span class="number">2023</span><span class="number">-06</span><span class="number">-30</span>T04:<span class="number">13</span>:<span class="number">52.839282</span>Z <span class="number">6</span> [Note] [MY<span class="number">-010454</span>] [<span class="keyword">Server</span>] A <span class="keyword">temporary</span> <span class="keyword">password</span> <span class="keyword">is</span> <span class="keyword">generated</span> <span class="keyword">for</span> root@localhost: <span class="number">13</span>KI1ddFdJ-(</span><br></pre></td></tr></table></figure>
+<p>비밀번호는 13KI1ddFdJ-( 이다. </p>
+<p>다시 mysql 에 로그인해서 root 계정 비밀번호를 바꾼다. </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;새비번&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트에 쓸 DB를 만든다. </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> ssbDB;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트용 계정을 만들고 권한을 부여한다. </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;아이디&#x27;</span>@<span class="string">&#x27;접속위치(ip)&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;비번&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ssbDB.* <span class="keyword">TO</span> <span class="string">&#x27;아이디&#x27;</span>@<span class="string">&#x27;접속위치(ip)&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트에서 테스트하니 Public Key Retrieval is not allowed 발생.</p>
+<p>방법1. url 에 allowPublicKeyRetrieval&#x3D;true 붙이기</p>
+<p>방법2. 사용자 인증 플러그인 native_password로 바꾸기</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;User&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">&#x27;비번&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>나는 방법 2로 했다. </p>
+<h4 id="젠킨스-설치-패스"><a href="#젠킨스-설치-패스" class="headerlink" title="젠킨스 설치(패스)"></a>젠킨스 설치(패스)</h4><p>젠킨스 설치는 다른데도 많으니 생략한다.<br>리액트를 eirslett 라이브러리를 써서 프로젝트 빌드시<br>리액트빌드-&gt; resources&#x2F;static으로 파일 이동 -&gt; 스프링부트 빌드 -&gt; target에 war 생성 순으로 설정했다.<br>그러나 리액트 빌드 도중 메모리 부족으로 실패. </p>
+<p>package.json에서 빌드 명령어 수정 </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;<span class="keyword">build</span><span class="string">&quot;: &quot;</span><span class="keyword">set</span> NODE_OPTIONS=--max_old_space_size=<span class="number">4096</span>&amp;&amp;<span class="keyword">set</span> GENERATE_SOURCEMAP=<span class="literal">false</span>&amp;&amp;react-scripts <span class="keyword">build</span><span class="string">&quot;,</span></span><br></pre></td></tr></table></figure>
+<p>스왑 메모리 설정</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo fallocate -l 2G /swapfile</span><br><span class="line">sudo <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br><span class="line">sudo swapon --show</span><br><span class="line">sudo nano /etc/fstab</span><br><span class="line">/swapfile none swap sw 0 0</span><br></pre></td></tr></table></figure>
+<p>결과: 계속 실패(돈많으면 가능…)</p>
+<p>젠킨스 사용 보류 </p>
+<h4 id="war-시작-파일-만들기-옵션"><a href="#war-시작-파일-만들기-옵션" class="headerlink" title="war 시작 파일 만들기(옵션)"></a>war 시작 파일 만들기(옵션)</h4><p>파일 위치는 변경 후 사용해야한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># WAR 파일 경로</span></span><br><span class="line">WAR_FILE=<span class="string">&quot;./dscheduler-0.0.1-SNAPSHOT.war&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 포트 설정</span></span><br><span class="line">PORT=8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># Java 실행 명령어</span></span><br><span class="line">JAVA_CMD=<span class="string">&quot;java&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># JVM 옵션</span></span><br><span class="line">JAVA_OPTS=<span class="string">&quot;-Xmx512m -Xms256m&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 로그 폴더 경로</span></span><br><span class="line">LOG_FOLDER=<span class="string">&quot;./logs&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 백그라운드에서 WAR 파일 실행</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Starting the application...&quot;</span></span><br><span class="line">  LOG_FILE=<span class="string">&quot;<span class="variable">$LOG_FOLDER</span>/ssbScheduler-<span class="subst">$(date +&#x27;%Y-%m-%d&#x27;)</span>.log&quot;</span></span><br><span class="line">  <span class="built_in">nohup</span> <span class="variable">$JAVA_CMD</span> <span class="variable">$JAVA_OPTS</span> -jar <span class="variable">$WAR_FILE</span> --server.port=<span class="variable">$PORT</span> &gt; <span class="string">&quot;<span class="variable">$LOG_FILE</span>&quot;</span> 2&gt;&amp;1 &amp;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Application started. Logs are being saved to: <span class="variable">$LOG_FILE</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행 중인 프로세스 종료</span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Stopping the application...&quot;</span></span><br><span class="line">  PID=$(pgrep -f <span class="variable">$WAR_FILE</span>)</span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$PID</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">kill</span> <span class="variable">$PID</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Application stopped.&quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Application is not running.&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 명령어 파라미터에 따라 실행</span></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Usage: <span class="variable">$0</span> &#123;start|stop&#125;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="탄력적-IP-설정-및-연결"><a href="#탄력적-IP-설정-및-연결" class="headerlink" title="탄력적 IP 설정 및 연결"></a>탄력적 IP 설정 및 연결</h4><p>ec2 &gt; 탄력적IP -&gt; 주소할당-&gt; 주소연결(인스턴스로)</p>
+<p>이렇게 인스턴스 세팅은 끝이다. 다음은 aws 세팅이다. </p>
+<h3 id="aws-설정"><a href="#aws-설정" class="headerlink" title="aws 설정"></a>aws 설정</h3><h4 id="도메인-route53"><a href="#도메인-route53" class="headerlink" title="도메인(route53)"></a>도메인(route53)</h4><p>aws 콘솔&gt;Route53&gt;등록된 도메인&gt;도메인 등록<br>도메인 골라서 결제(꽤비쌈)<br>route53에서 도메인을 구매했더니 대기중인 요청에 한 10분정도 있다가 호스팅영역에 자동으로 추가되고 네임서버도 자동으로 등록이 되어있었다. </p>
+<p>호스팅영역에서 ip를 연결한다. https인증서를 쓸려면 로드밸런서를 연결한다.<br>나는 1인 유저기때문에 바로 ip에 연결했다.</p>
+<p>호스팅영역-&gt;레코드 생성. 아래와 같이 작성</p>
+<p>레코드 이름: 원하는 이름<br>레코드 유형: A<br>값: 연결할 ip 입력.<br>TTL: 300<br>라우팅 정책: 지리적위치(한국에서만)<br>위치: 한국<br>레코드ID: 내맘대로</p>
+<h4 id="RDS-적용취소"><a href="#RDS-적용취소" class="headerlink" title="RDS(적용취소)"></a>RDS(적용취소)</h4><p>db.t3.small 싱글 인스턴스 가격 0.063USD&#x2F;h 이 나와서 인스턴스 내 db를 설치해서 사용하기로 노선변경<br>가장 싼 db.t4g.micro 를 사용하면 0.025USD&#x2F;h 한달에 3만원가량<br>-&gt; 이건 무려 프리티어지만 나는 프리하지 않다..<br>그 외 저장 비용등은 낮아서 생략한다.<br><img src="/exploreHA/images/image.png"></p>
+<h4 id="SPOT인스턴스-적용취소"><a href="#SPOT인스턴스-적용취소" class="headerlink" title="SPOT인스턴스(적용취소)"></a>SPOT인스턴스(적용취소)</h4><p>RDS -&gt; 로컬DB 사용으로 패스<br>RDS를 사용한다면 SPOT으로 변경하고 때때로 서비스 불량이 있을 수 있지만<br>가격이 낮아져 t4g.small을 사용할수도 있을 것 같다.<br>그러면 메모리가 2기가로 높아지고 속도가 올라가 리액트 빌드가 가능해지고<br>젠킨스를 사용할 수 있게 될것으로 예상<br>비용은 4만원&#x2F;월 정도 예상</p>
+<p>접속 순서 정리:<br>브라우저에서 설정한 도메인 입력<br>탄력ip로 연결<br>인스턴스 보안그룹 통과<br>nginx가 8080으로 연결<br>스프링부트에서 로컬 db 접근<br>스프링부트 내 index.html 으로 안내</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1184,302 +1419,6 @@ Setter 주입과 메서드 주입(Method Injection)은 서로 비슷한 방법�
 <li>Hibernate 란 무엇인가 ? </li>
 <li>객체 주입방식 종류와 특징, 차이점</li>
 <li>스프링 MVC life cycle 구조</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/04/04/Regular%20Expression%20in%20Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
-      <meta itemprop="name" content="북극여우">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="블로그제목">
-      <meta itemprop="description" content="설명">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 블로그제목">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/exploreHA/2023/04/04/Regular%20Expression%20in%20Java/" class="post-title-link" itemprop="url">Regular Expression in Java</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-04-04 15:33:18" itemprop="dateCreated datePublished" datetime="2023-04-04T15:33:18+09:00">2023-04-04</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/exploreHA/2023/04/04/Regular%20Expression%20in%20Java/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/04/04/Regular Expression in Java/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Regular-Expression-to-Format-a-Number-String"><a href="#Regular-Expression-to-Format-a-Number-String" class="headerlink" title="Regular Expression to Format a Number String"></a>Regular Expression to Format a Number String</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>We discussed a regular expression used to format a number string by adding commas every three digits. The regular expression is <code>(\d)(?=(?:\d&#123;3&#125;)+(?!\d))</code> and it is used with the <code>replace</code> method in JavaScript to add commas to the number string.</p>
-<h2 id="Regular-Expression-Breakdown"><a href="#Regular-Expression-Breakdown" class="headerlink" title="Regular Expression Breakdown"></a>Regular Expression Breakdown</h2><p>We broke down the regular expression into its components:</p>
-<ul>
-<li><code>(\d)</code>: This is a capture group that matches any single digit.</li>
-<li><code>(?=...)</code>: This is a positive lookahead that matches the following pattern without including it in the match.</li>
-<li><code>(?:...)</code>: This is a non-capturing group that groups together the following pattern without creating a capture group.</li>
-<li><code>\d&#123;3&#125;</code>: This matches any three digits.</li>
-<li><code>+</code>: This matches one or more of the previous pattern.</li>
-<li><code>(?!\d)</code>: This is a negative lookahead that matches the following pattern only if it is not followed by a digit.</li>
-</ul>
-<h2 id="Regular-Expression-Explanation"><a href="#Regular-Expression-Explanation" class="headerlink" title="Regular Expression Explanation"></a>Regular Expression Explanation</h2><p>We explained that the regular expression matches any single digit that is followed by one or more groups of three digits that are not followed by a digit. This effectively matches every digit in the number string except for the ones at the end that are not part of a group of three.</p>
-<h2 id="Example-Process"><a href="#Example-Process" class="headerlink" title="Example Process"></a>Example Process</h2><p>We provided an example process to demonstrate how the regular expression works. Suppose we have the number string “1000000000”. The regular expression matches the first digit “1” because it is followed by a group of three digits “000”. It then matches the second digit “0” because it is followed by another group of three digits “000”. It continues to match every digit in the number string that is followed by a group of three digits. When it reaches the end of the string, it stops matching because the last digit “0” is not followed by a group of three digits.</p>
-<h2 id="Conclusion-1"><a href="#Conclusion-1" class="headerlink" title="Conclusion 1"></a>Conclusion 1</h2><p>We concluded that the regular expression <code>(\d)(?=(?:\d&#123;3&#125;)+(?!\d))</code> can be used to format a number string by adding commas every three digits. The regular expression matches every digit in the string except for the ones at the end that are not part of a group of three.</p>
-<h2 id="More-Techniques"><a href="#More-Techniques" class="headerlink" title="More Techniques"></a>More Techniques</h2><ol>
-<li><p>Negative Lookahead: This is similar to positive lookahead, but it matches if the pattern does NOT occur after the current position. It is denoted by (?!pattern).</p>
-</li>
-<li><p>Capturing Groups with Names: Instead of just using numbered capturing groups like $1, you can assign names to capturing groups for easier reference. For example, (?<year>\d{4}) would match a four-digit number and capture it in the group named “year”.</p>
-</li>
-<li><p>Quantifiers: Quantifiers allow you to specify how many times a character or group should be matched. For example, a{3,5} would match “aaa”, “aaaa”, or “aaaaa”, but not “aa”.</p>
-</li>
-<li><p>Alternation: Alternation allows you to match one pattern OR another. It is denoted by the | symbol. For example, (cat|dog) would match “cat” or “dog”.</p>
-</li>
-<li><p>Character Classes: Character classes allow you to match a range of characters. For example, [a-z] would match any lowercase letter, and [0-9] would match any digit.</p>
-</li>
-<li><p>Non-Capturing Groups: Similar to capturing groups, non-capturing groups allow you to group  parts of the pattern together without capturing the match. This can be useful for improving performance and simplifying the regular expression. Non-capturing groups are denoted by (?:pattern).</p>
-</li>
-<li><p>Anchors: Anchors allow you to match a pattern at a specific position in the string. The most common anchors are ^, which matches the start of a line, and $, which matches the end of a line.</p>
-</li>
-<li><p>Backreferences: Backreferences allow you to match a pattern that was previously matched by a capturing group. This can be useful for finding repeated patterns in a string. Backreferences are denoted by \number, where number is the number of the capturing group you want to reference.</p>
-</li>
-<li><p>Lookbehinds: Lookbehinds are similar to lookaheads, but they match a pattern that precedes the current position in the string. Lookbehinds are denoted by (?&lt;&#x3D;pattern) for a positive lookbehind and (?&lt;!pattern) for a negative lookbehind.</p>
-</li>
-<li><p>Unicode Characters: Regular expressions can match any Unicode character by using escape sequences. For example, \p{L} matches any letter, and \p{N} matches any digit.</p>
-</li>
-<li><p>Character Classes: Character classes allow you to match a single character from a set of characters. They are denoted by square brackets, for example [aeiou] matches any vowel.</p>
-</li>
-<li><p>Alternation: Alternation allows you to match one of several alternatives. It is denoted by the pipe character |. For example, (cat|dog) matches either “cat” or “dog”.</p>
-</li>
-<li><p>Quantifiers: Quantifiers allow you to match a certain number of repetitions of a pattern. The most common quantifiers are * for zero or more, + for one or more, and ? for zero or one.</p>
-</li>
-<li><p>Dot: The dot . matches any character except a newline character.</p>
-</li>
-<li><p>Word Boundaries: Word boundaries allow you to match a pattern only when it appears at the beginning or end of a word. They are denoted by \b.</p>
-</li>
-<li><p>Greedy vs. Lazy Matching: By default, regular expressions are greedy and match as much as possible. You can use a ? after a quantifier to make it lazy and match as little as possible.</p>
-</li>
-<li><p>Character Escapes: Character escapes allow you to match characters that have special meaning in regular expressions. For example, to match a literal dot character, you need to escape it with a backslash: ..</p>
-</li>
-<li><p>Substitution: Regular expressions are often used to replace text. You can use the replace() method to substitute matches with other text.</p>
-</li>
-<li><p>Flags: Regular expressions can have flags that modify their behavior. The most common flags are i for case-insensitive matching and g for global matching.</p>
-</li>
-<li><p>Grouping: Grouping allows you to treat a pattern as a single unit and apply a quantifier to it. Groups are denoted by parentheses, for example a(bc)+ matches “abc”, “abcbc”, “abcbcbc”, and so on.</p>
-</li>
-</ol>
-<h2 id="Conclution-2"><a href="#Conclution-2" class="headerlink" title="Conclution 2"></a>Conclution 2</h2><p>얼마전 코딩테스트 보러갔다가 종이 시험을 보는것을 보고 1차로 놀랐다. 그리곤 문제를 보는데 1번부터 내 머리속에 아무것도 없는것을 느끼고 2차로 놀랐다. IDE의 힘을 빌려 AI HELPER의 빌려 살다보니 그렇다. 특히 정규식같은 부분은 한번 써놓고 오래 보질 않으니 다 휘발되고 머리에 남은게 없었다.<br>그렇게 계속 생각없이 살다가 Fiddler로 결제모듈을 뜯다보니 왠걸 갑자기 내가 정규식이 아닌 리스트로 풀었던 답이 딱 나오길래 글을 남긴다. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">amount</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;10000000&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">formattedStr</span> <span class="operator">=</span> str.replaceAll(<span class="string">&quot;(\\d)(?=(?:\\d&#123;3&#125;)+(?!\\d))&quot;</span>, <span class="string">&quot;$1,&quot;</span>);</span><br><span class="line">        <span class="comment">// str의 한글자 한글자를 정규식을 대입해서 일치하면 캡처한 변수 $1로 바꾼다. </span></span><br><span class="line">        <span class="comment">// (\\d): 첫번째 차례인 문자가 숫자인경우, 값을 캡쳐한다. 일치하지않으면 다음 차례 문자를 검사한다. </span></span><br><span class="line">        <span class="comment">// (?=) : 전방탐색(positive lookahead)으로 str 끝까지 미리 일치하는지 검사 한다. </span></span><br><span class="line">        <span class="comment">// (?:) : 괄호안에 있어도 캡쳐하지 않는다는 뜻이다.</span></span><br><span class="line">        <span class="comment">// \\d&#123;3&#125;+ : 숫자 3개로 이루어진 세트가 여러개 있는것을 말한다.</span></span><br><span class="line">        <span class="comment">// (?!) : 이 다음이 아닌경우를 찾는다. </span></span><br><span class="line">        <span class="comment">// \\d : 숫자를 뜻한다. </span></span><br><span class="line">        <span class="comment">// 종합: 맨 처음부터 문자 한개를 잡고 그뒤로 숫자 3개가 붙어있는 세트가 쭉 이어지는지 검사한다. 딱 맞아 떨어지면 캡쳐해놓은 맨 처음 숫자에 ,를 더해서 교체한다. </span></span><br><span class="line">        <span class="comment">// 만약 딱 맞아 떨어지지 않으면 그냥 통과한다. </span></span><br><span class="line">        System.out.println(formattedStr);   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/02/14/Swift-Questions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
-      <meta itemprop="name" content="북극여우">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="블로그제목">
-      <meta itemprop="description" content="설명">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 블로그제목">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/exploreHA/2023/02/14/Swift-Questions/" class="post-title-link" itemprop="url">Swift Questions</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-02-14 09:51:13" itemprop="dateCreated datePublished" datetime="2023-02-14T09:51:13+09:00">2023-02-14</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/exploreHA/2023/02/14/Swift-Questions/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/02/14/Swift-Questions/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ol>
-<li><p>What is the difference between an enumeration and a structure in Swift?</p>
-<p>In Swift, an enumeration (or “enum” for short) is a value type that represents a group of related values. Enums are defined using the <code>enum</code> keyword and can be used to define a set of possible values for a variable, for example, a list of error codes, or a list of days of the week. Enums can also have associated values, which can be used to store additional information for each case.<br>A structure (or “struct” for short) is also a value type in Swift that represents a group of related values, but it can store multiple values of different types, similar to a class. Structures can have properties, methods, and initializers, and they can also conform to protocols.</p>
-<p>요약: 열거형(“Enum”)은 관련 값 그룹 유형이며 값 집합을 정의하는데 사용한다. 구조체(“Struct”)는 관련 값 그룹 인것 맞지만 서로 다른 유형의 여러 값을 저장할 수 있으며, 속성, 메서드, 이니셜라이저를 갖고 프로토콜을 따를 수도 있다. </p>
-</li>
-<li><p>Can you give an example of using optional chaining in Swift?</p>
-<p>Optional chaining in Swift is a way of calling properties, methods, or subscripts on an optional value, where the optional value may be <code>nil</code>. If the optional value is <code>nil</code>, the result of the optional chaining is <code>nil</code>, otherwise, it returns the result of the operation.</p>
-<p>Here’s an example of using optional chaining in Swift:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> address: <span class="type">Address</span>?</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name <span class="operator">=</span> name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> street: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> city: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">street</span>: <span class="type">String</span>, <span class="params">city</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.street <span class="operator">=</span> street</span><br><span class="line">        <span class="keyword">self</span>.city <span class="operator">=</span> city</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> john <span class="operator">=</span> <span class="type">Person</span>(name: <span class="string">&quot;John&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> street <span class="operator">=</span> john.address<span class="operator">?</span>.street &#123;</span><br><span class="line">    <span class="built_in">print</span>(street)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;john does not have an address&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">john.address <span class="operator">=</span> <span class="type">Address</span>(street: <span class="string">&quot;Jong-ro&quot;</span>,city: <span class="string">&quot;Seoul&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> street <span class="operator">=</span> john.address<span class="operator">?</span>.street &#123;</span><br><span class="line">    <span class="built_in">print</span>(street)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;john does not have an address&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Output:</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">john does not have an address</span><br><span class="line">Jong-ro</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>What is the purpose of the “defer” statement in Swift?</p>
-<p> The “defer” statement in Swift is used to execute a block of code just before the current function returns. The code in the “defer” block is executed regardless of how the function returns, whether it returns normally, or due to an exception being thrown.<br> The main use case for the “defer” statement is to perform cleanup tasks, such as freeing up resources, closing files, or releasing locks, even if the function exits early due to an error. This helps to simplify the code by centralizing the cleanup code in a single place and making it easier to understand the code flow.</p>
-<p> 요약: “defer”는 함수 반환 전 정상, 예외 여부와 관계없이 마지막에 실행되는것으로 오류로 인해 조기에 종료되더라도 파일닫기, 잠금해제같은 작업을 수행하기 위함이다. </p>
-<p> Here’s an example of using the “defer” statement in Swift:</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">processFile</span>(<span class="params">fileName</span>: <span class="type">String</span>) <span class="keyword">throws</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> file <span class="operator">=</span> <span class="keyword">try</span> openFile(fileName)</span><br><span class="line">    <span class="keyword">defer</span> &#123;</span><br><span class="line">        closeFile(file)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// perform some processing on the file</span></span><br><span class="line">    <span class="keyword">try</span> processContents(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> In this example, the openFile function is called to open a file, and the closeFile function is called in the defer block to close the file. The closeFile function is guaranteed to be called, even if the processContents function throws an error, because the defer block is executed just before the processFile function returns. This makes it easy to ensure that the file is always closed, even if an error occurs during the processing of the file.</p>
-</li>
-<li><p>What is the difference between a class and a structure in Swift?</p>
-<p> In Swift, a class and a structure are both used to define custom data types, but they have some key differences.<br> Classes are reference types, which means that when you assign a class instance to a variable, you are actually creating a reference to the instance, not a copy of it. This means that multiple variables can refer to the same instance, and changes to the instance made through one reference will be visible through all references.<br> Structures, on the other hand, are value types, which means that when you assign a struct instance to a variable, you are creating a copy of the instance. This means that changes to the instance made through one reference will not affect other references to the same instance.<br> Classes can also inherit from other classes and can be used to create objects, while structures cannot. Structures, however, are generally faster and more efficient than classes, especially when it comes to small instances, and they are also easier to manage and debug because they are self-contained.</p>
-<p> 요약: 구조체, 클래스 모두 데이터 유형 정의에 사용. 클래스를 인스턴스에 할당하면 복제가 아닌 참조를 만드는것이나, 구조는 복사본이 생성된다. 클래스는 다른 클래스에서 상속할 수 있고 객체를 만드는데 사용할 수 있지만 구조체는 그렇지 않다. 인스턴스가 작으면 구조체가 더 효율적일 수 있다. </p>
-</li>
-<li><p>Can you explain the difference between a class method and an instance method in Swift?</p>
-<p> Class methods are called on the class itself, while instance methods are called on instances of the class.<br> Class methods can be called without creating an instance of the class, while instance methods require an instance to be created.<br> Class methods have the class keyword in their declaration, while instance methods do not.</p>
-<p> 클래스 메서드는 클래스 자체에서 인스턴스 할당 없이 호출되는 반면,<br> 인스턴스 메서드는 클래스를 인스턴스에 할당 한 뒤에 그 인스턴스에서 호출된다.</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">func</span> <span class="title function_">displayClassName</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Car&quot;</span>)</span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">displayInstanceName</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Instance of Car&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Car</span>.displayClassName() <span class="comment">// Output: Car</span></span><br><span class="line"><span class="keyword">let</span> myCar <span class="operator">=</span> <span class="type">Car</span>()</span><br><span class="line">myCar.displayInstanceName() <span class="comment">// Output: Instance of Car</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>Can you give an example of using generics in Swift?</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">sortArray</span>&lt;<span class="type">T</span>: <span class="type">Comparable</span>&gt;(<span class="keyword">_</span> <span class="params">array</span>: [<span class="type">T</span>]) -&gt; [<span class="type">T</span>] &#123;</span><br><span class="line">    <span class="keyword">return</span> array.sorted()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example usage:</span></span><br><span class="line"><span class="keyword">let</span> unsortedInts <span class="operator">=</span> [<span class="number">5</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">7</span>]</span><br><span class="line"><span class="keyword">let</span> sortedInts <span class="operator">=</span> sortArray(unsortedInts)</span><br><span class="line"><span class="built_in">print</span>(sortedInts) <span class="comment">// Output: [2, 3, 5, 7, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> unsortedStrings <span class="operator">=</span> [<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;bird&quot;</span>, <span class="string">&quot;fish&quot;</span>]</span><br><span class="line"><span class="keyword">let</span> sortedStrings <span class="operator">=</span> sortArray(unsortedStrings)</span><br><span class="line"><span class="built_in">print</span>(sortedStrings) <span class="comment">// Output: [&quot;bird&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;fish&quot;]</span></span><br></pre></td></tr></table></figure>
-
-<p> 함수 sortArray는 Comparable프로토콜을 따르는 제네릭 타입 T를 사용한다. Comparable을 따른다는것은 비교연산자를 사용할 수 있다는것이다. </p>
-</li>
-<li><p>What is the difference between optional binding and optional chaining in Swift?</p>
-<p> Optional binding is used to safely unwrap an optional value and bind it to a new variable or constant, and it’s typically used when you need to perform operations on the unwrapped value.<br> In this example, we use optional binding with if let to safely unwrap the optional value optionalName and bind it to the new constant name. If the optional value is nil, the code inside the else block will be executed. Here’s an example:</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> optionalName: <span class="type">String</span>? <span class="operator">=</span> <span class="string">&quot;John&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> name <span class="operator">=</span> optionalName &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello, <span class="subst">\(name)</span>!&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello, stranger.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 옵셔널 바인딩은 안전하게 변수를 언랩하기 위함이다. </p>
-<p> Optional chaining, on the other hand, is used to safely access a property or call a method on an optional value, without needing to first unwrap the value. In this example, we use optional chaining with the ? operator to safely access the street property of the person’s address property. If person.address is nil, the code inside the else block will be executed instead.<br> Here’s an example:</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> address: <span class="type">Address</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> street: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> city: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> state: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person <span class="operator">=</span> <span class="type">Person</span>(name: <span class="string">&quot;John&quot;</span>, age: <span class="number">30</span>, address: <span class="type">Address</span>(street: <span class="string">&quot;123 Main St&quot;</span>, city: <span class="string">&quot;Anytown&quot;</span>, state: <span class="string">&quot;CA&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> street <span class="operator">=</span> person.address<span class="operator">?</span>.street &#123; <span class="comment">// &lt;==</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;He lives on <span class="subst">\(street)</span>.&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No address found.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 반면 옵셔널체이닝은 안전하게 변수에 접근하기 위함이다.</p>
-</li>
-<li><p>Can you explain the difference between class inheritance and protocol-oriented programming in Swift?</p>
-<p> Both class inheritance and protocol-oriented programming are ways to achieve code reuse and polymorphism in Swift, but they have different approaches and trade-offs.</p>
-<p> Class inheritance is a mechanism where a subclass inherits properties and methods from a superclass. The subclass can also override and add its own properties and methods. Class inheritance is a form of vertical code reuse because it defines a hierarchy of classes with shared functionality. </p>
-<p> &#x3D;&gt; 클래스는 일부를 공유하는 계층적 구조이므로 수직적인 상속 형태라고 볼 수 있다. </p>
-<p> In this example, the Cat class inherits from the Animal class, which defines a name and sound property and a makeSound() method. The Cat class overrides the makeSound() method to provide its own implementation.</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> sound: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>, <span class="params">sound</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name <span class="operator">=</span> name</span><br><span class="line">        <span class="keyword">self</span>.sound <span class="operator">=</span> sound</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">makeSound</span>() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;<span class="subst">\(name)</span> makes <span class="subst">\(sound)</span>!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>: <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name, sound: <span class="string">&quot;meow&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">makeSound</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;<span class="subst">\(name)</span> purrs.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat <span class="operator">=</span> <span class="type">Cat</span>(name: <span class="string">&quot;Whiskers&quot;</span>)</span><br><span class="line">cat.makeSound() <span class="comment">// Output: &quot;Whiskers purrs.&quot; (Example of overriden func)</span></span><br></pre></td></tr></table></figure>
-
-<p> Protocol-oriented programming, on the other hand, is a programming paradigm where functionality is defined in small, composable protocols that can be combined to create new types. This is a form of horizontal code reuse because it encourages the creation of many small protocols with specific functionality that can be combined and reused in different ways. </p>
-<p> 다양한 방식으로 결합하고 재사용할 수 있는 작은 프로토콜의 생성&#x3D;&gt; 수평적 코드 재사용</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protocol</span> <span class="title class_">Movable</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> speed: <span class="type">Double</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">move</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span>: <span class="title class_">Movable</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> speed: <span class="type">Double</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">speed</span>: <span class="type">Double</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.speed <span class="operator">=</span> speed</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">move</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;The car is moving at <span class="subst">\(speed)</span> mph.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Plane</span>: <span class="title class_">Movable</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> speed: <span class="type">Double</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">speed</span>: <span class="type">Double</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.speed <span class="operator">=</span> speed</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">move</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;The plane is flying at <span class="subst">\(speed)</span> mph.&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> car <span class="operator">=</span> <span class="type">Car</span>(speed: <span class="number">60</span>)</span><br><span class="line"><span class="keyword">let</span> plane <span class="operator">=</span> <span class="type">Plane</span>(speed: <span class="number">500</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vehicles: [<span class="type">Movable</span>] <span class="operator">=</span> [car, plane]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> vehicle <span class="keyword">in</span> vehicles &#123;</span><br><span class="line">    vehicle.move()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> While protocols and class inheritance can achieve similar results in some cases, they have different strengths and use cases.</p>
-<p> One advantage of using protocols is that they allow for greater flexibility and modularity in your code. Protocols can be adopted by a wide range of types, including classes, structs, and enums. This means that you can create more specialized types that conform to a protocol, rather than having to subclass a more general type. This can help avoid issues with tight coupling and inheritance hierarchies that can arise with class inheritance.</p>
-<p> Additionally, protocols can be used to achieve polymorphism across types that don’t share a common superclass. With protocols, you can define a common set of requirements that any conforming type must implement, allowing you to work with a wider range of types that share a particular behavior.</p>
-<p> Another advantage of protocols is that they allow for composition over inheritance. With protocols, you can define small, modular interfaces that can be combined to create larger and more complex behaviors. This can make your code more flexible and easier to maintain, since you can reuse small pieces of functionality in different contexts.</p>
-<p> In summary, while protocols and class inheritance can both achieve code reuse and polymorphism, protocols have different strengths and use cases, including greater flexibility and modularity, better support for polymorphism across different types, and the ability to compose smaller pieces of functionality into larger behaviors.</p>
-<p> &#x3D;&gt; 프로토콜은 더 큰 유연성과 모듈성을 허용하며, 클래스 뿐만 아니라 구조체, 열거형 등에서도 사용하며 하위 클래스로 분류하는게 아닌 프로토콜을 준수하는 유형으로 취급하여 클래스 상속에서 발생할 수 있는 강결합 및 상속 계층 문제를 방지한다.<br> &#x3D;&gt; 클래스 상속과 프로토콜을 동시에 사용이 가능하다.</p>
-</li>
-<li><p>How does Swift handle type casting?</p>
-<p>In Swift, type casting is the process of checking the type of an instance at runtime and converting it to another type if possible. There are two types of type casting in Swift: upcasting and downcasting.</p>
-<p>Upcasting is the process of converting an instance of a subclass to an instance of its superclass. Since a subclass is guaranteed to have all the properties and methods of its superclass, upcasting is always safe in Swift. </p>
-<p>Here’s an example of upcasting and downcasting in Swift:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">class</span> <span class="title class_">Human</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name <span class="operator">=</span> name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher</span>: <span class="title class_">Human</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> school: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>, <span class="params">school</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.school <span class="operator">=</span> school</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span>: <span class="title class_">Human</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> school: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">name</span>: <span class="type">String</span>, <span class="params">school</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.school <span class="operator">=</span> school</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Upcasting to the Human superclass</span></span><br><span class="line"><span class="keyword">let</span> human: <span class="type">Human</span> <span class="operator">=</span> <span class="type">Teacher</span>(name: <span class="string">&quot;John Doe&quot;</span>, school: <span class="string">&quot;Acme High School&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> human2: <span class="type">Human</span> <span class="operator">=</span> <span class="type">Student</span>(name: <span class="string">&quot;Jimmy Yo&quot;</span>, school: <span class="string">&quot;Batman School&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> humanList <span class="operator">=</span> [<span class="type">Human</span>]()</span><br><span class="line"></span><br><span class="line">humanList.append(human)</span><br><span class="line">humanList.append(human2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Downcasting to the Teacher subclass</span></span><br><span class="line"><span class="keyword">for</span> human <span class="keyword">in</span> humanList &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> teacher <span class="operator">=</span> human <span class="keyword">as?</span> <span class="type">Teacher</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;<span class="subst">\(teacher.name)</span> is teacher&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> student <span class="operator">=</span> human <span class="keyword">as?</span> <span class="type">Student</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;<span class="subst">\(student.name)</span> is student&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;<span class="subst">\(human.name)</span> is something else&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Downcasting is the process of converting an instance of a superclass to an instance of a subclass. Since a superclass does not necessarily have all the properties and methods of its subclasses, downcasting is not always safe in Swift. To perform a downcast safely, you need to use the optional type-casting operator as? or the forced type-casting operator as!.</p>
-<p>&#x3D;&gt; type을 쓰면 어떤 클래스인지 정확하게 알 수 있다.<br>&#x3D;&gt; 업캐스팅은 서브클래스를 어퍼클래스로 취급하고싶을때 사용 (포장)<br>&#x3D;&gt; 다운캐스팅은 업캐스팅된 서브클래스를 다시 서브클래스로 취급하고싶을때 사용 (포장 제거)</p>
-</li>
-<li><p>Can you give an example of using the guard statement in Swift to handle optional values?</p>
-<p>guard. 진짜면 나간다.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">greet</span>(<span class="params">name</span>: <span class="type">String</span>?) &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> name <span class="operator">=</span> name <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;No name provided&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello, <span class="subst">\(name)</span>!&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">greet(name: <span class="string">&quot;John&quot;</span>) <span class="comment">// prints &quot;Hello, John!&quot;</span></span><br><span class="line">greet(name: <span class="literal">nil</span>) <span class="comment">// prints &quot;No name provided&quot;</span></span><br></pre></td></tr></table></figure>
-<p>greet 함수는 옵셔널 String을 파라메터로 받는다. 이 함수에서 guard는 name 파라메터가 nil인지 검사하고 조건이 true 이면 gurad를 나가고, false 이면(nil이면) guard 안을 돈다.</p>
-</li>
 </ol>
 
       

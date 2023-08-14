@@ -21,28 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jspgmp.github.io","root":"/exploreHA/","images":"/exploreHA/images","scheme":"Gemini","darkmode":true,"version":"8.14.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/exploreHA/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/config.min.js"></script>
 
-    <meta name="description" content="가. array 배열의 합  for number in array { sum +&#x3D; number} array.reduce(0, { (first:Int, seconde:Int) -&gt; Int in return first + second }) array.reduce(0){$0+$1} array.reduce(0, +)">
+    <meta name="description" content="Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다. 여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift Practices">
-<meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/02/07/Swift%20Practices/index.html">
+<meta property="og:title" content="스프링부트 Redis 세션설정">
+<meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/index.html">
 <meta property="og:site_name" content="블로그제목">
-<meta property="og:description" content="가. array 배열의 합  for number in array { sum +&#x3D; number} array.reduce(0, { (first:Int, seconde:Int) -&gt; Int in return first + second }) array.reduce(0){$0+$1} array.reduce(0, +)">
+<meta property="og:description" content="Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다. 여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-07T01:29:04.000Z">
-<meta property="article:modified_time" content="2023-02-07T06:26:42.395Z">
+<meta property="article:published_time" content="2023-08-14T07:46:32.000Z">
+<meta property="article:modified_time" content="2023-08-14T07:49:51.915Z">
 <meta property="article:author" content="북극여우">
 <meta property="article:tag" content="자바, 스위프트">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jspgmp.github.io/exploreHA/2023/02/07/Swift%20Practices/">
+<link rel="canonical" href="https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/02/07/Swift%20Practices/","path":"2023/02/07/Swift Practices/","title":"Swift Practices"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/","path":"2023/08/14/스프링부트 Redis 세션/","title":"스프링부트 Redis 세션설정"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Swift Practices | 블로그제목</title>
+<title>스프링부트 Redis 세션설정 | 블로그제목</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-43861RVV8R"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-43861RVV8R","only_pageview":false}</script>
@@ -191,7 +191,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/02/07/Swift%20Practices/">
+    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/exploreHA/images/avatar.gif">
@@ -204,12 +204,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Swift Practices | 블로그제목">
+      <meta itemprop="name" content="스프링부트 Redis 세션설정 | 블로그제목">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Swift Practices<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMvU3dpZnQgUHJhY3RpY2VzLm1k" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
+          스프링부트 Redis 세션설정<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMv7Iqk7ZSE66eB67aA7Yq4IFJlZGlzIOyEuOyFmC5tZA==" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
         </h1>
 
         <div class="post-meta-container">
@@ -220,7 +220,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-02-07 10:29:04" itemprop="dateCreated datePublished" datetime="2023-02-07T10:29:04+09:00">2023-02-07</time>
+      <time title="Created: 2023-08-14 16:46:32" itemprop="dateCreated datePublished" datetime="2023-08-14T16:46:32+09:00">2023-08-14</time>
     </span>
 
   
@@ -232,8 +232,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/exploreHA/2023/02/07/Swift%20Practices/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/02/07/Swift Practices/" itemprop="commentCount"></span>
+    <a title="disqus" href="/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/08/14/스프링부트 Redis 세션/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -247,13 +247,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>가. array 배열의 합</p>
-<ol>
-<li>for number in array { sum +&#x3D; number}</li>
-<li>array.reduce(0, { (first:Int, seconde:Int) -&gt; Int in return first + second })</li>
-<li>array.reduce(0){$0+$1}</li>
-<li>array.reduce(0, +)</li>
-</ol>
+        <p>Spring Security의 SessionManagementConfigurer가 제공하는 sessionRegistry()는 일반적으로 인메모리 세션 관리를 사용합니다. 즉, 단일 JVM 인스턴스 내에서만 세션 정보를 추적하게 됩니다.</p>
+<p>여러 인스턴스 또는 분산된 환경에서 애플리케이션을 실행하는 경우 (예: 클라우드 환경, 마이크로서비스 아키텍처, 로드 밸런서 뒤의 여러 서버 인스턴스) 이러한 인메모리 세션 관리 방식은 문제를 일으킬 수 있습니다. 왜냐하면 각 JVM 인스턴스는 자신만의 세션 정보를 가지고 있어서 다른 인스턴스의 세션 정보를 알지 못하기 때문입니다.</p>
+<p>반면, SpringSessionBackedSessionRegistry는 Spring Session을 사용하며, Spring Session은 외부 저장소 (예: Redis, JDBC, Hazelcast 등)를 사용하여 세션 정보를 저장합니다. 이 방식을 사용하면 여러 애플리케이션 인스턴스 간에 세션 정보를 공유할 수 있습니다.</p>
+<p>따라서:</p>
+<p>단일 인스턴스 환경에서는 Spring Security의 기본 sessionRegistry()만으로도 충분합니다.<br>하지만 여러 인스턴스에서 세션 정보를 공유해야 하는 환경에서는 SpringSessionBackedSessionRegistry와 같은 방법을 사용하여 Spring Session을 활용해야 합니다.<br>이렇게 설정함으로써 여러 서버 인스턴스 간에 세션 정보를 일관되게 공유하면서 동시 로그인 제한과 같은 기능을 정상적으로 구현할 수 있습니다.</p>
+<p>사전 Redis 세션 설정을 마치고 추가적으로 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> FindByIndexNameSessionRepository sessionRepository;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> SpringSessionBackedSessionRegistry <span class="title function_">sessionRegistry</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringSessionBackedSessionRegistry</span>&lt;&gt;(<span class="built_in">this</span>.sessionRepository);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    .sessionManagement()</span><br><span class="line">        .maximumSessions(<span class="number">1</span>)</span><br><span class="line">        .maxSessionsPreventsLogin(<span class="literal">true</span>)</span><br><span class="line">        .sessionRegistry(sessionRegistry())</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>커스텀 로그인 핸들이 없어도 된다. </p>
 
     </div>
 
@@ -267,14 +269,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/exploreHA/2023/01/09/hello-world/" rel="prev" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/" rel="prev" title="프로젝트aws셋업">
+                  <i class="fa fa-chevron-left"></i> 프로젝트aws셋업
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/exploreHA/2023/02/14/Swift-Questions/" rel="next" title="Swift Questions">
-                  Swift Questions <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

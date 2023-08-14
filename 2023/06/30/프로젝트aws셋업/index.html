@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/exploreHA/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/exploreHA/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/exploreHA/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/exploreHA/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="5AUIVYTbHIAuz-eQtxSfZbWW5eg9_EVZMSQycIuXrG0">
+
+<link rel="stylesheet" href="/exploreHA/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jspgmp.github.io","root":"/exploreHA/","images":"/exploreHA/images","scheme":"Gemini","darkmode":true,"version":"8.14.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/exploreHA/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/config.min.js"></script>
+
+    <meta name="description" content="프론트+백엔드 프로젝트 aws로 서비스하기1. 프로젝트 소개학원 운영을 하며 여러가지 관리할것들이 쌓이다보니, 상당히 복잡해져 웹서비스로 준비하게 되었다.  프론트엔드: DevExtreme 리액트 라이브러리개인은 무료다.DataGrid, Shceduler, 기본 template으로 다 했다.jsp mvc에서는 화면을 전적으로 백엔드에서 통제를 하지만, 리액">
+<meta property="og:type" content="article">
+<meta property="og:title" content="프로젝트aws셋업">
+<meta property="og:url" content="https://jspgmp.github.io/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/index.html">
+<meta property="og:site_name" content="블로그제목">
+<meta property="og:description" content="프론트+백엔드 프로젝트 aws로 서비스하기1. 프로젝트 소개학원 운영을 하며 여러가지 관리할것들이 쌓이다보니, 상당히 복잡해져 웹서비스로 준비하게 되었다.  프론트엔드: DevExtreme 리액트 라이브러리개인은 무료다.DataGrid, Shceduler, 기본 template으로 다 했다.jsp mvc에서는 화면을 전적으로 백엔드에서 통제를 하지만, 리액">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jspgmp.github.io/exploreHA/images/image.png">
+<meta property="article:published_time" content="2023-06-30T12:47:43.000Z">
+<meta property="article:modified_time" content="2023-08-14T07:45:11.071Z">
+<meta property="article:author" content="북극여우">
+<meta property="article:tag" content="자바, 스위프트">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jspgmp.github.io/exploreHA/images/image.png">
+
+
+<link rel="canonical" href="https://jspgmp.github.io/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jspgmp.github.io/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/","path":"2023/06/30/프로젝트aws셋업/","title":"프로젝트aws셋업"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>프로젝트aws셋업 | 블로그제목</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-43861RVV8R"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-43861RVV8R","only_pageview":false}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/analytics/google-analytics.min.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/exploreHA/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/exploreHA/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">블로그제목</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">두번째블로그</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/exploreHA/" rel="section"><i class="fa fa-bell fa-fw"></i>Home</a></li><li class="menu-item menu-item-docs"><a href="/exploreHA/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li><li class="menu-item menu-item-archives"><a href="/exploreHA/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">15</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%94%84%EB%A1%A0%ED%8A%B8-%EB%B0%B1%EC%97%94%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-aws%EB%A1%9C-%EC%84%9C%EB%B9%84%EC%8A%A4%ED%95%98%EA%B8%B0"><span class="nav-number">1.</span> <span class="nav-text">프론트+백엔드 프로젝트 aws로 서비스하기</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C"><span class="nav-number">1.1.</span> <span class="nav-text">1. 프로젝트 소개</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-DevExtreme-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC"><span class="nav-number">1.1.1.</span> <span class="nav-text">프론트엔드: DevExtreme 리액트 라이브러리</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B0%B1%EC%97%94%EB%93%9C-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8"><span class="nav-number">1.1.2.</span> <span class="nav-text">백엔드: 스프링부트</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-aws%EC%9C%BC%EB%A1%9C"><span class="nav-number">1.2.</span> <span class="nav-text">2. aws으로</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%84%A4%EC%A0%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">인스턴스 설정</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EB%B3%B4%EC%95%88%EA%B7%B8%EB%A3%B9"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">보안그룹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%9E%90%EB%B0%94-%EC%84%A4%EC%B9%98"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">자바 설치</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx-%EC%84%A4%EC%B9%98"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">nginx 설치</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql8-%EC%84%A4%EC%B9%98-amazon-linux-2"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">mysql8 설치 (amazon linux 2)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%A0%A0%ED%82%A8%EC%8A%A4-%EC%84%A4%EC%B9%98-%ED%8C%A8%EC%8A%A4"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">젠킨스 설치(패스)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#war-%EC%8B%9C%EC%9E%91-%ED%8C%8C%EC%9D%BC-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%98%B5%EC%85%98"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">war 시작 파일 만들기(옵션)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%ED%83%84%EB%A0%A5%EC%A0%81-IP-%EC%84%A4%EC%A0%95-%EB%B0%8F-%EC%97%B0%EA%B2%B0"><span class="nav-number">1.2.1.7.</span> <span class="nav-text">탄력적 IP 설정 및 연결</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aws-%EC%84%A4%EC%A0%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">aws 설정</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EB%8F%84%EB%A9%94%EC%9D%B8-route53"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">도메인(route53)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDS-%EC%A0%81%EC%9A%A9%EC%B7%A8%EC%86%8C"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">RDS(적용취소)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SPOT%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%A0%81%EC%9A%A9%EC%B7%A8%EC%86%8C"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">SPOT인스턴스(적용취소)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">북극여우</p>
+  <div class="site-description" itemprop="description">설명</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/exploreHA/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jspgmp.github.io/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/exploreHA/images/avatar.gif">
+      <meta itemprop="name" content="북극여우">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="블로그제목">
+      <meta itemprop="description" content="설명">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="프로젝트aws셋업 | 블로그제목">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          프로젝트aws셋업<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL25leHQtdGhlbWUvdGhlbWUtbmV4dC1kb2NzL2VkaXQvbWFzdGVyL3NvdXJjZS9fcG9zdHMv7ZSE66Gc7KCd7Yq4YXdz7IWL7JeFLm1k" title="Edit this post"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-30 21:47:43" itemprop="dateCreated datePublished" datetime="2023-06-30T21:47:43+09:00">2023-06-30</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/exploreHA/2023/06/30/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8aws%EC%85%8B%EC%97%85/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/06/30/프로젝트aws셋업/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="프론트-백엔드-프로젝트-aws로-서비스하기"><a href="#프론트-백엔드-프로젝트-aws로-서비스하기" class="headerlink" title="프론트+백엔드 프로젝트 aws로 서비스하기"></a>프론트+백엔드 프로젝트 aws로 서비스하기</h1><h2 id="1-프로젝트-소개"><a href="#1-프로젝트-소개" class="headerlink" title="1. 프로젝트 소개"></a>1. 프로젝트 소개</h2><p>학원 운영을 하며 여러가지 관리할것들이 쌓이다보니, 상당히 복잡해져 웹서비스로 준비하게 되었다. </p>
+<h3 id="프론트엔드-DevExtreme-리액트-라이브러리"><a href="#프론트엔드-DevExtreme-리액트-라이브러리" class="headerlink" title="프론트엔드: DevExtreme 리액트 라이브러리"></a>프론트엔드: DevExtreme 리액트 라이브러리</h3><p>개인은 무료다.<br>DataGrid, Shceduler, 기본 template으로 다 했다.<br>jsp mvc에서는 화면을 전적으로 백엔드에서 통제를 하지만, 리액트에서는 별개로 돌아가기 때문에 강제로 로그인 이후 화면으로 진입한다면 리소스 제한만 했다.<br>Doc를 보면서 화면을 제작하다보니 가장 많은 시간이 들어갔고, 컴포넌트 안에 컴포넌트를 반복해서 집어넣다보니 상태관리나 변수 조절이 까다로웠다. </p>
+<h3 id="백엔드-스프링부트"><a href="#백엔드-스프링부트" class="headerlink" title="백엔드: 스프링부트"></a>백엔드: 스프링부트</h3><p>JPA로 여러 엔티티를 모조리 관계를 맺었다.<br>useYn 과 레코드 삭제(cascade)까지 사용했다. cascade 설정 시 customId를 사용하면 생성시기가 늦어 삭제가 안되므로 cascade적용 엔티티는 기본 id생성규칙을 따랐다.<br>RDS로 설정했다가 비용이 많이나와서 ec2에 직접 mysql8을 설치해서 사용하는것으로 변경했다. 로컬 개발환경의 mysql과 ec2 의 것을 일치시키면 편하다.<br>스프링 시큐리티 로그인(jwt)을 적용했다. </p>
+<h2 id="2-aws으로"><a href="#2-aws으로" class="headerlink" title="2. aws으로"></a>2. aws으로</h2><h3 id="인스턴스-설정"><a href="#인스턴스-설정" class="headerlink" title="인스턴스 설정"></a>인스턴스 설정</h3><p>처음 ami 고를 때 amazon linux 2023으로 했더니 mysql8설치가 귀찮아졌다. 빠르게 인스턴스 세팅을 다시 amazon linux 2로 하다가 인스턴스 유형을 x86 t2.micro에서 arm t4g.micro로 변경했다. 이유는 속도는 비슷하고 조금 더 싸다.<br>온디맨드 시간당 t2.micro : 0.0116USD, t4g.micro : 0.0084USD<br>프리티어는 날아가서 없다. </p>
+<h4 id="보안그룹"><a href="#보안그룹" class="headerlink" title="보안그룹"></a>보안그룹</h4><p>처음에 인스턴스 생성 시 보안그룹을 만들거나 기존것을 고른다.<br>인바운드: http로 들어오니 80포트 모두에게<br>쉘로 붙어야 하니 22포트 내 ip만<br>로컬에서 DB 넣어야 하니 3306포트 내 ip만, 아웃바운드는 다 허용</p>
+<h4 id="자바-설치"><a href="#자바-설치" class="headerlink" title="자바 설치"></a>자바 설치</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum list <span class="strong">*java*</span> </span><br></pre></td></tr></table></figure>
+<p>검색해서 원하는 것으로 설치한다.<br>나는 java-17-amazon-corretto-headless.aarch64<br>으로 설치했다. </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">java</span> -version</span><br><span class="line"></span><br><span class="line"><span class="attribute">openjdk</span> version <span class="string">&quot;17.0.7&quot;</span> <span class="number">2023</span>-<span class="number">04</span>-<span class="number">18</span> LTS</span><br><span class="line"><span class="attribute">OpenJDK</span> Runtime Environment Corretto-<span class="number">17.0.7.7</span>.<span class="number">1</span> (build <span class="number">17</span>.<span class="number">0</span>.<span class="number">7</span>+<span class="number">7</span>-LTS)</span><br><span class="line"><span class="attribute">OpenJDK</span> <span class="number">64</span>-Bit Server VM Corretto-<span class="number">17.0.7.7</span>.<span class="number">1</span> (build <span class="number">17</span>.<span class="number">0</span>.<span class="number">7</span>+<span class="number">7</span>-LTS, mixed mode, sharing)</span><br></pre></td></tr></table></figure>
+<p>잘 나오니 환경변수 설정은 패스한다. </p>
+<h4 id="nginx-설치"><a href="#nginx-설치" class="headerlink" title="nginx 설치"></a>nginx 설치</h4><p>인스턴스로 http를 타고 들어오면 80포트로 들어온다.<br>리액트를 빌드해서 스프링부트에 넣고 다시 war로 감싸서 8080포트로 들어가야 하므로 리버스 프록시 설정을 해줄 nginx를 설치한다. </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nginx</span><br><span class="line">sudo vi <span class="regexp">/etc/</span>nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>80포트를 8080으로 물려주는 세팅을 한다. (###안 부분)</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">listen</span>       [::]:<span class="number">80</span> default_server;</span><br><span class="line">        <span class="attribute">server_name</span>  _;</span><br><span class="line">        <span class="attribute">root</span>         /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">        <span class="attribute">include</span> /etc/nginx/default.d/<span class="regexp">*.conf</span>;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="comment">################################################</span></span><br><span class="line">                <span class="attribute">proxy_pass</span> http://localhost:8080;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">                <span class="attribute">proxy_set_header</span> X-Forwarded-For proxy_add_x_forwarded_for;</span><br><span class="line">            <span class="comment">################################################</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">            <span class="section">location</span> = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">            <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>대개는 location 안쪽만 수정을 하면된다. </p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="params">system</span>ctl start nginx</span><br><span class="line">sudo <span class="params">system</span>ctl enable nginx</span><br></pre></td></tr></table></figure>
+<p>시작하고 시작프로그램으로 등록한다. </p>
+<h4 id="mysql8-설치-amazon-linux-2"><a href="#mysql8-설치-amazon-linux-2" class="headerlink" title="mysql8 설치 (amazon linux 2)"></a>mysql8 설치 (amazon linux 2)</h4><p>amazon linux 2023은 잘 안됐다. 그래서 인스턴트 다시 생성</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo amazon-linux-<span class="keyword">extras </span><span class="keyword">install </span>epel -y</span><br></pre></td></tr></table></figure>
+<p>epel repo 설치</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install https:<span class="regexp">//</span>repo.mysql.com/mysql80-community-release-el7-<span class="number">5</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>MySql Community Repo 설치(최신버전있는데 이걸로하는게 설치 잘됌)</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install mysql-community-<span class="keyword">server</span></span><br><span class="line">sudo yum install mysql-community-<span class="keyword">client</span></span><br></pre></td></tr></table></figure>
+<p>둘째줄은 이미 설치됐다고 나왔다.<br>출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1ldmkudGVjaC9pbnN0YWxsLW15c3FsLTgtY2xpZW50LW9uLWFtYXpvbi1saW51eC0yLWFybS1hbmQteDg2XzY0Lw==">https://blog.mevi.tech/install-mysql-8-client-on-amazon-linux-2-arm-and-x86_64/<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start <span class="symbol">mysqld@</span></span><br></pre></td></tr></table></figure>
+<p>mysql을 실행한다. </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -<span class="selector-tag">p</span></span><br></pre></td></tr></table></figure>
+<p>mysql8은 초기비밀번호가 있단다. 찾으러간다.</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cat /var/<span class="keyword">log</span>/mysqld.<span class="keyword">log</span></span><br><span class="line"></span><br><span class="line"><span class="number">2023</span><span class="number">-06</span><span class="number">-30</span>T04:<span class="number">13</span>:<span class="number">52.839282</span>Z <span class="number">6</span> [Note] [MY<span class="number">-010454</span>] [<span class="keyword">Server</span>] A <span class="keyword">temporary</span> <span class="keyword">password</span> <span class="keyword">is</span> <span class="keyword">generated</span> <span class="keyword">for</span> root@localhost: <span class="number">13</span>KI1ddFdJ-(</span><br></pre></td></tr></table></figure>
+<p>비밀번호는 13KI1ddFdJ-( 이다. </p>
+<p>다시 mysql 에 로그인해서 root 계정 비밀번호를 바꾼다. </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;새비번&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트에 쓸 DB를 만든다. </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> ssbDB;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트용 계정을 만들고 권한을 부여한다. </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;아이디&#x27;</span>@<span class="string">&#x27;접속위치(ip)&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;비번&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ssbDB.* <span class="keyword">TO</span> <span class="string">&#x27;아이디&#x27;</span>@<span class="string">&#x27;접속위치(ip)&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>프로젝트에서 테스트하니 Public Key Retrieval is not allowed 발생.</p>
+<p>방법1. url 에 allowPublicKeyRetrieval&#x3D;true 붙이기</p>
+<p>방법2. 사용자 인증 플러그인 native_password로 바꾸기</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;User&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">&#x27;비번&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>나는 방법 2로 했다. </p>
+<h4 id="젠킨스-설치-패스"><a href="#젠킨스-설치-패스" class="headerlink" title="젠킨스 설치(패스)"></a>젠킨스 설치(패스)</h4><p>젠킨스 설치는 다른데도 많으니 생략한다.<br>리액트를 eirslett 라이브러리를 써서 프로젝트 빌드시<br>리액트빌드-&gt; resources&#x2F;static으로 파일 이동 -&gt; 스프링부트 빌드 -&gt; target에 war 생성 순으로 설정했다.<br>그러나 리액트 빌드 도중 메모리 부족으로 실패. </p>
+<p>package.json에서 빌드 명령어 수정 </p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;<span class="keyword">build</span><span class="string">&quot;: &quot;</span><span class="keyword">set</span> NODE_OPTIONS=--max_old_space_size=<span class="number">4096</span>&amp;&amp;<span class="keyword">set</span> GENERATE_SOURCEMAP=<span class="literal">false</span>&amp;&amp;react-scripts <span class="keyword">build</span><span class="string">&quot;,</span></span><br></pre></td></tr></table></figure>
+<p>스왑 메모리 설정</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo fallocate -l 2G /swapfile</span><br><span class="line">sudo <span class="built_in">chmod</span> 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br><span class="line">sudo swapon --show</span><br><span class="line">sudo nano /etc/fstab</span><br><span class="line">/swapfile none swap sw 0 0</span><br></pre></td></tr></table></figure>
+<p>결과: 계속 실패(돈많으면 가능…)</p>
+<p>젠킨스 사용 보류 </p>
+<h4 id="war-시작-파일-만들기-옵션"><a href="#war-시작-파일-만들기-옵션" class="headerlink" title="war 시작 파일 만들기(옵션)"></a>war 시작 파일 만들기(옵션)</h4><p>파일 위치는 변경 후 사용해야한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># WAR 파일 경로</span></span><br><span class="line">WAR_FILE=<span class="string">&quot;./dscheduler-0.0.1-SNAPSHOT.war&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 포트 설정</span></span><br><span class="line">PORT=8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># Java 실행 명령어</span></span><br><span class="line">JAVA_CMD=<span class="string">&quot;java&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># JVM 옵션</span></span><br><span class="line">JAVA_OPTS=<span class="string">&quot;-Xmx512m -Xms256m&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 로그 폴더 경로</span></span><br><span class="line">LOG_FOLDER=<span class="string">&quot;./logs&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 백그라운드에서 WAR 파일 실행</span></span><br><span class="line"><span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Starting the application...&quot;</span></span><br><span class="line">  LOG_FILE=<span class="string">&quot;<span class="variable">$LOG_FOLDER</span>/ssbScheduler-<span class="subst">$(date +&#x27;%Y-%m-%d&#x27;)</span>.log&quot;</span></span><br><span class="line">  <span class="built_in">nohup</span> <span class="variable">$JAVA_CMD</span> <span class="variable">$JAVA_OPTS</span> -jar <span class="variable">$WAR_FILE</span> --server.port=<span class="variable">$PORT</span> &gt; <span class="string">&quot;<span class="variable">$LOG_FILE</span>&quot;</span> 2&gt;&amp;1 &amp;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Application started. Logs are being saved to: <span class="variable">$LOG_FILE</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실행 중인 프로세스 종료</span></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Stopping the application...&quot;</span></span><br><span class="line">  PID=$(pgrep -f <span class="variable">$WAR_FILE</span>)</span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$PID</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">kill</span> <span class="variable">$PID</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Application stopped.&quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Application is not running.&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 명령어 파라미터에 따라 실행</span></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Usage: <span class="variable">$0</span> &#123;start|stop&#125;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="탄력적-IP-설정-및-연결"><a href="#탄력적-IP-설정-및-연결" class="headerlink" title="탄력적 IP 설정 및 연결"></a>탄력적 IP 설정 및 연결</h4><p>ec2 &gt; 탄력적IP -&gt; 주소할당-&gt; 주소연결(인스턴스로)</p>
+<p>이렇게 인스턴스 세팅은 끝이다. 다음은 aws 세팅이다. </p>
+<h3 id="aws-설정"><a href="#aws-설정" class="headerlink" title="aws 설정"></a>aws 설정</h3><h4 id="도메인-route53"><a href="#도메인-route53" class="headerlink" title="도메인(route53)"></a>도메인(route53)</h4><p>aws 콘솔&gt;Route53&gt;등록된 도메인&gt;도메인 등록<br>도메인 골라서 결제(꽤비쌈)<br>route53에서 도메인을 구매했더니 대기중인 요청에 한 10분정도 있다가 호스팅영역에 자동으로 추가되고 네임서버도 자동으로 등록이 되어있었다. </p>
+<p>호스팅영역에서 ip를 연결한다. https인증서를 쓸려면 로드밸런서를 연결한다.<br>나는 1인 유저기때문에 바로 ip에 연결했다.</p>
+<p>호스팅영역-&gt;레코드 생성. 아래와 같이 작성</p>
+<p>레코드 이름: 원하는 이름<br>레코드 유형: A<br>값: 연결할 ip 입력.<br>TTL: 300<br>라우팅 정책: 지리적위치(한국에서만)<br>위치: 한국<br>레코드ID: 내맘대로</p>
+<h4 id="RDS-적용취소"><a href="#RDS-적용취소" class="headerlink" title="RDS(적용취소)"></a>RDS(적용취소)</h4><p>db.t3.small 싱글 인스턴스 가격 0.063USD&#x2F;h 이 나와서 인스턴스 내 db를 설치해서 사용하기로 노선변경<br>가장 싼 db.t4g.micro 를 사용하면 0.025USD&#x2F;h 한달에 3만원가량<br>-&gt; 이건 무려 프리티어지만 나는 프리하지 않다..<br>그 외 저장 비용등은 낮아서 생략한다.<br><img src="/exploreHA/images/image.png"></p>
+<h4 id="SPOT인스턴스-적용취소"><a href="#SPOT인스턴스-적용취소" class="headerlink" title="SPOT인스턴스(적용취소)"></a>SPOT인스턴스(적용취소)</h4><p>RDS -&gt; 로컬DB 사용으로 패스<br>RDS를 사용한다면 SPOT으로 변경하고 때때로 서비스 불량이 있을 수 있지만<br>가격이 낮아져 t4g.small을 사용할수도 있을 것 같다.<br>그러면 메모리가 2기가로 높아지고 속도가 올라가 리액트 빌드가 가능해지고<br>젠킨스를 사용할 수 있게 될것으로 예상<br>비용은 4만원&#x2F;월 정도 예상</p>
+<p>접속 순서 정리:<br>브라우저에서 설정한 도메인 입력<br>탄력ip로 연결<br>인스턴스 보안그룹 통과<br>nginx가 8080으로 연결<br>스프링부트에서 로컬 db 접근<br>스프링부트 내 index.html 으로 안내</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/exploreHA/2023/04/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EB%B0%B0%EC%B9%98-%EA%B5%AC%EB%8F%99%EC%88%9C%EC%84%9C/" rel="prev" title="스프링부트 배치 구동순서">
+                  <i class="fa fa-chevron-left"></i> 스프링부트 배치 구동순서
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/exploreHA/2023/08/14/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8%20Redis%20%EC%84%B8%EC%85%98/" rel="next" title="스프링부트 Redis 세션설정">
+                  스프링부트 Redis 세션설정 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NexT</span>
+</div>
+  <div class="powered-by">Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.8/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/comments.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/motion.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/next-boot.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/pjax.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js","integrity":"sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU="}}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/tags/mermaid.min.js"></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/math/mathjax.min.js"></script>
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"next-theme","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-next/8.14.1/third-party/comments/disqus.min.js"></script>
+
+</body>
+</html>
